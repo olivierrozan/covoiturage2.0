@@ -1,0 +1,26 @@
+{
+  "generator-cg-angular15": {
+    "uirouter": true,
+    "modalDirectory": "modal/",
+    "directiveDirectory": "directive/",
+    "filterDirectory": "filter/",
+    "serviceDirectory": "service/",
+    "componentDirectory": "component/",
+    "inject": {
+      "ts": {
+        "file": "index.ts",
+        "template": "import './<%= filename.substring(0,filename.lastIndexOf('.')) %>';",
+        "relativeToModule": true
+      },
+      "scss": {
+        "relativeToModule": true,
+        "file": "index.scss",
+        "marker": "/* Add Component SCSS Above */",
+        "template": "@import \"<%= filename.substring(0,filename.lastIndexOf('.')) %>\";"
+      }
+    },
+    "modules": [
+      
+    ]
+  }
+}

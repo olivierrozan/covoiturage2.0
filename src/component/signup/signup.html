@@ -1,0 +1,36 @@
+<!-- !! A SUPPRIMER LORS DU DEPLOIEMENT !!
+jdurand : aaaaaa
+jduval : bbbbbb
+lahmad : cccccc
+Admin : admin59
+orozan : OzTprP -->
+
+<div layout="column" layout-margin flex layout-align="center center">
+
+    <h2>Inscription</h2>
+    <form id="loginForm" layout="column" ng-submit="loginCtrl.login()">
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Identifiant</label>
+            <input type="text" ng-model="loginCtrl.user.login" />
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input type="text" ng-model="loginCtrl.user.mail" />
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Répéter l'email</label>
+            <input type="text" ng-model="loginCtrl.user.mail2" />
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Mot de passe</label>
+            <input type="text" ng-model="loginCtrl.user.password" />
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Répéter le mot de passe</label>
+            <input type="text" ng-model="loginCtrl.user.password2" />
+        </md-input-container>
+
+        <input id="loginButton" type="submit" class="md-raised md-primary md-button md-ink-ripple" value="S'inscrire">
+    </form>
+</div>

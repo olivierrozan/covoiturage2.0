@@ -1,0 +1,28 @@
+#loginButton {
+    margin-top: 30px;
+    height: 10px;
+    background-color: #2196f3 !important;
+}
+
+h2 {
+    background-color: rgb(33, 150, 243);
+    margin:  20px auto 0px auto !important;
+    padding: 20px;
+    width: 480px;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+    color: white;
+}
+
+#loginForm {
+    background-color: /*rgba(33, 150, 243, 0.3)*/white;
+    margin: 0px auto 20px auto;
+    padding: 20px;
+    width: 480px;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+#loginForm md-input-container {
+    margin: 10px;
+}
