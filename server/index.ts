@@ -1,52 +1,34 @@
-var express = require("express");
-var session = require("cookie-session");
-var bodyParser = require("body-parser");
-const Sequelize = require('sequelize');
+const express = require("express");
+const session = require("cookie-session");
+const bodyParser = require("body-parser");
 
-var allEntries = require("./connexion.ts");
+const passport = require('passport');
+const expressSession = require('express-session');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: true });
-var app = express();
+//const allEntries = require("./connexion.ts");
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const p = require('./config/passport.ts');
+p.pass(passport);
 
-const seq = new Sequelize('covoiturage', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+const app = express();
 
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
+app.use(expressSession({ secret: 'mySecretKey' }));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+const route = require('./app/routes.ts');
+route.allRoutes(app, passport, urlencodedParser);
+
+app.use((req, res, next) => {
+    res.setHeader("Content-Type", "text/html");
+    /*res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");*/
+    res.status(404).send('Page introuvable ! Contactez l\'administrateur du site');
+    next();
 });
-
-seq
-    .authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-
-app
-    .post("/connexion", urlencodedParser, function (req, res) {
-        res.header("Access-Control-Allow-Origin", "*");
-        try{
-            req.body = JSON.parse(Object.keys(req.body)[0]);
-        }catch(err){
-            req.body = req.body;
-        }
-        
-        allEntries.getAll(seq, req.body).then((response) => {
-            res.send(JSON.stringify(response));
-        });
-    })
-
-    .use((req, res, next) => {
-        res.setHeader("Content-Type", "text/html");
-        res.header("Access-Control-Allow-Origin", "*");
-        res.status(404).send('Page introuvable ! Contactez l\'administrateur du site');
-    });
 
 app.listen(9300);

@@ -31,7 +31,7 @@ import { LoginService } from '../../service/login/loginService';
     }
 }*/
 
-angular.module('main').directive('menu', [($http) => {
+angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
     return {
         restrict: 'E',
         replace: true,
@@ -48,7 +48,7 @@ angular.module('main').directive('menu', [($http) => {
 
     }
 
-    function Menu($http) {
+    function Menu($http, $state) {
         this.user = {
             email: 'rozan.olivier@gmail.com',
             password: 'OzTprP'
@@ -64,8 +64,9 @@ angular.module('main').directive('menu', [($http) => {
             };
     
             $http.post('http://localhost:9300/connexion', this.user, config).then((response) => {
-                this.result = response.data;
-                console.log('response: ', this.result);
+                if (response) {
+                    $state.go('home');
+                }
             }).then((error) => {
                 return error;
             });
