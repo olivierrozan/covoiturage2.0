@@ -8,7 +8,7 @@ orozan : OzTprP -->
 <div layout="column" layout-margin flex layout-align="center center">
 
     <h2>Inscription</h2>
-    <form method="POST" action="http://localhost:9300/signup"  id="loginForm" layout="column" ng-submit="signupCtrl.signup()">
+    <form method="POST" id="loginForm" layout="column" ng-submit="signupCtrl.signup()">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
             <input type="text" name="email" ng-model="signupCtrl.user.email" />

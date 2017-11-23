@@ -70,7 +70,7 @@ export let pass = (passport) => {
     });
 
     passport.serializeUser((user, done) => {
-        done(null, user._id);
+        done(null, user.dataValues.id);
     });
 
     passport.deserializeUser((id, done) => {
