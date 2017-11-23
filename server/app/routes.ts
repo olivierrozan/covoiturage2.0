@@ -1,4 +1,4 @@
-export function allRoutes(app, passport, urlencodedParser) {
+export let allRoutes = (app, passport, urlencodedParser) => {
     // app.post("/connexion", urlencodedParser, (req, res, next) => {
     //     res.header("Access-Control-Allow-Origin", "*");
     //     try {
@@ -18,30 +18,44 @@ export function allRoutes(app, passport, urlencodedParser) {
     //     res.redirect('/home');
     // }));
 
-    app.post('/connexion', urlencodedParser, passport.authenticate('local-login', {
-        successRedirect: 'http://localhost:9200/#!/home', // redirect to the secure profile section
+    app.post('/signup', (req, res, next) => {
+            try {
+                req.body = JSON.parse(Object.keys(req.body)[0]);
+            } catch (err) {
+                req.body = req.body;
+            }
+            console.log("body parsing", req.body);
+            
+            passport.authenticate('local-signup', {
+                successRedirect : 'http://localhost:9200/#!/home', // redirect to the secure profile section
+                failureRedirect : 'http://localhost:9200/#!/signup', // redirect back to the signup page if there is an error
+                failureFlash : true // allow flash messages
+            })(req,res,next);
+        });
+
+    app.post('/connexion', passport.authenticate('local-login', {
+        successRedirect: 'http://localhost:9200/#!/home', // redirect to the secure home section
         failureRedirect: 'http://localhost:9200/#!/signup', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
-    }), (req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        console.log("hello");
+    }));
 
-        if (req.body.remember) {
-            req.session.cookie.maxAge = 1000 * 60 * 3;
-        } else {
-            req.session.cookie.expires = false;
-        }
-        res.redirect('/');
+    app.get('/logout', (req, res) => {
+        req.session.destroy((err) => {
+            console.log("BYE");
+            //res.redirect('http://localhost:9200/#!/signup');
+            // res.writeHead(302, {
+            //     Location: 'http://localhost:9200/#!/signup'
+            // });
+            res.send(err);
+        });
+        //req.logout();
+        //res.redirect('http://localhost:9200/#!/signup');
+
     });
-
-    app.get('/logout', function(req, res) {
-		req.logout();
-		res.redirect('/');
-	});
 }
 
 // route middleware to make sure
-function isLoggedIn(req, res, next) {
+let isLoggedIn = (req, res, next) => {
 
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())

@@ -1,9 +1,21 @@
 const express = require("express");
-const session = require("cookie-session");
-const bodyParser = require("body-parser");
-
+const app = express();
 const passport = require('passport');
 const expressSession = require('express-session');
+const bodyParser = require("body-parser");
+
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+app.use(urlencodedParser);
+app.use(bodyParser.json());
+app.use(expressSession({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+const session = require("cookie-session");
 
 //const allEntries = require("./connexion.ts");
 const flash = require('connect-flash');
@@ -11,13 +23,7 @@ const cookieParser = require('cookie-parser');
 const p = require('./config/passport.ts');
 p.pass(passport);
 
-const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const app = express();
-
-app.use(expressSession({ secret: 'mySecretKey' }));
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
 
 const route = require('./app/routes.ts');
