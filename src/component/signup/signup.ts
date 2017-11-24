@@ -11,6 +11,7 @@ angular.module('main').component('signup', {
 
         private user;
         private signupForm;
+        private status;
         
         constructor(private $http: ng.IHttpService, private $state) {
             this.user = {
@@ -27,7 +28,8 @@ angular.module('main').component('signup', {
             };
             
             this.$http.post('http://localhost:9300/signup', this.user, config).then((response) => {
-                console.log("created, ", this.user);
+                console.log("created, ", response);
+                this.status = response.status;
             }).then((error) => {
                 return error;
             });

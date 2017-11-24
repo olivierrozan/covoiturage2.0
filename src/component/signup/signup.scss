@@ -26,3 +26,14 @@ h2 {
 #loginForm md-input-container {
     margin: 10px;
 }
+
+.success {
+    background-color: rgba(0, 160, 0, 0.15);
+    color: green;
+    border-radius: 10px;
+
+    margin:  20px auto 0px auto !important;
+    padding: 20px;
+    width: 480px;
+    text-align: center;
+}
