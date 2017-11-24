@@ -1,3 +1,5 @@
+'use strict';
+
 import * as angular from 'angular';
 
 angular.module('main').component('signup', {
@@ -8,6 +10,7 @@ angular.module('main').component('signup', {
     controller: class SignupCtrl {
 
         private user;
+        private signupForm;
         
         constructor(private $http: ng.IHttpService, private $state) {
             this.user = {
