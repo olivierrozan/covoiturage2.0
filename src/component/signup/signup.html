@@ -13,35 +13,39 @@ orozan : OzTprP -->
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Prénom</label>
                 <input type="text" name="firstname" ng-model="signupCtrl.user.firstname" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                <div ng-messages="signupForm.firstname.$error" ng-show="signupForm.firstname.$invalid && signupForm.firstname.$touched" style="color:maroon" role="alert">
+                    <div ng-message="pattern">only letters required</div>
+                </div>
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Nom</label>
                 <input type="text" name="lastname" ng-model="signupCtrl.user.lastname" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                <div ng-messages="signupForm.lastname.$error" ng-show="signupForm.lastname.$invalid && signupForm.lastname.$touched" style="color:maroon" role="alert">
+                    <div ng-message="pattern">only letters required</div>
+                </div>
             </md-input-container>
         </div>
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
             <input type="email" name="email" ng-model="signupCtrl.user.email" required/>
-            <div ng-messages="signupForm.email.$error" style="color:maroon" role="alert">
+            <div ng-messages="signupForm.email.$error" ng-show="signupForm.email.$invalid && signupForm.email.$touched" style="color:maroon" role="alert" required>
                 <div ng-message="required">You did not enter a field</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Mot de passe</label>
             <input type="password" name="password" ng-model="signupCtrl.user.password" ng-pattern="/^[a-zA-Z0-9]{8,16}$/i" required/>
-            <div ng-messages="signupForm.password.$error" style="color:maroon" role="alert">
-                <div ng-message="required">You did not enter a field</div>
-                <div ng-message="minlength">Your field is too short</div>
-                <div ng-message="maxlength">Your field is too long</div>
+            <div ng-messages="signupForm.password.$error" ng-show="signupForm.password.$invalid && signupForm.password.$touched" style="color:maroon" role="alert">
+                <div ng-message="pattern">Incorrect password (numbers, letters, between 8 and 16)</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Répéter mot de passe</label>
-            <input signup-validator type="password" name="signupValidator" ng-model="signupValidator" required/>
-            <!-- <div ng-messages="signupForm.signupValidator.$error" style="color:maroon" role="alert">
-                <div ng-message="opop">Different passwords</div>
-            </div> -->
+            <input signup-validator ref="{{signupCtrl.user.password}}" type="password" name="passwordCheck" ng-model="passwordCheck" required/>
+            <div ng-messages="signupForm.passwordCheck.$error" ng-show="signupForm.passwordCheck.$invalid && signupForm.passwordCheck.$touched" style="color:maroon" role="alert">
+                <div ng-message="diff">Different passwords</div>
+            </div>
         </md-input-container>
 
         <input id="loginButton" type="submit" class="md-raised md-primary md-button md-ink-ripple" value="S'inscrire" ng-disabled="!signupForm.$valid"

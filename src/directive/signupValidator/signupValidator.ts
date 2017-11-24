@@ -9,9 +9,8 @@ angular.module('main').directive('signupValidator', [() => {
 
     function link(scope, element, attrs, ctrl) {
         function validator(ngModelValue) {
-            console.log("directive", ngModelValue);
 
-            if (ngModelValue === 'efficient') {
+            if (ngModelValue === attrs.ref) {
                 ctrl.$setValidity('diff', true);
             } else {
                 ctrl.$setValidity('diff', false);
