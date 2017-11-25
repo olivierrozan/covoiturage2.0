@@ -70,7 +70,7 @@ export let pass = (passport) => {
     });
 
     passport.serializeUser((user, done) => {
-        done(null, user.dataValues.id);
+        done(null, user.id);
     });
 
     passport.deserializeUser((id, done) => {
@@ -91,11 +91,11 @@ export let pass = (passport) => {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        
+
         User.findOne({ where: { email: req.body.email } }).then((user) => {
 
             if (user) {
-                return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                return done(null, false,  req.flash('error', 'Oops! Wrong password.'));
             } else {
                 // if there is no user with that username
                 // create the user
@@ -113,35 +113,36 @@ export let pass = (passport) => {
                     voiture: 'aaa',
                     places: 66
                 };
-            
 
-            User.create(newUserMysql).then((newUser, created) => {
-                return done(null, newUser ? newUser : false);
-            });
-        }
+
+                User.create(newUserMysql).then((newUser, created) => {
+                    return done(null, newUser ? newUser : false);
+                });
+            }
         });
-})
+    })
     );
 
-passport.use(
-    'local-login',
-    new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-    },
-        (req, username, password, done) => {
-            User.findOne({ where: { email: username } }).then((user) => {
-                if (!user) {
-                    return done(null, false, { message: 'Incorrect username.' });
-                }
+    passport.use(
+        'local-login',
+        new LocalStrategy({
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true
+        },
+            (req, email, password, done) => {
+                // mail@mail.com    efficient
+                User.findOne({ where: { email: email } }).then((user) => {
+                    if (!user) {
+                        return done(null, false, { message: 'Incorrect username.' });
+                    }
 
-                if (!bcrypt.compareSync(password, user.password)) {
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-                }
+                    if (!bcrypt.compareSync(password, user.password)) {
+                        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    }
 
-                return done(null, user.get());
-            });
-        }
-    ));
+                    return done(null, user.get());
+                });
+            }
+        ));
 }

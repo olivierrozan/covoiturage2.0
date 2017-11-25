@@ -14,8 +14,8 @@ angular.module('main').component('home', {
         }
 
         public logout() {
-            this.$http.get('http://localhost:9200/logout').then((response) => {
-                this.$state.go('/signup');
+            this.$http.get('http://localhost:9300/logout').then((response) => {
+                //this.$state.go('/signup');
             }).then((error) => {
                 return error;
             });

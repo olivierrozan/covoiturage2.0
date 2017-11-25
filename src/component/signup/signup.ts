@@ -12,8 +12,8 @@ angular.module('main').component('signup', {
         private user;
         private signupForm;
         private status;
-        
-        constructor(private $http: ng.IHttpService, private $state) {
+
+        constructor(private $http: ng.IHttpService, private $state, private $mdToast) {
             this.user = {
                 email: 'rozan.oler@gmail.com',
                 password: 'efficient'
@@ -26,10 +26,25 @@ angular.module('main').component('signup', {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-            
+
             this.$http.post('http://localhost:9300/signup', this.user, config).then((response) => {
-                console.log("created, ", response);
-                this.status = response.status;
+                this.status = response.data['message'];
+
+                if (this.status === 'Created') {
+                    this.$mdToast.show(
+                        this.$mdToast.simple()
+                            .textContent("Utilisateur créé ! Un mail vous est envoyé à l'adresse mail indiquée !")
+                            .position('bottom left')
+                            .hideDelay(3000)
+                    );
+                } else {
+                    this.$mdToast.show(
+                        this.$mdToast.simple()
+                            .textContent("Erreur ! L'utilisateur existe déjà !")
+                            .position('bottom left')
+                            .hideDelay(3000)
+                    );
+                }
             }).then((error) => {
                 return error;
             });

@@ -19,6 +19,9 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     // }));
 
     app.post('/signup', (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
         } catch (err) {
@@ -26,27 +29,43 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         }
         console.log("body parsing", req.body);
 
-        passport.authenticate('local-signup', {
-            successRedirect: 'http://localhost:9200/#!/home', // redirect to the secure profile section
+        passport.authenticate('local-signup', function (err, user) {
+            if (err) { 
+                return next(err); 
+            }
+            if (!user) { 
+                return res.json({ message: 'Duplicate' }); 
+            } else {
+                return res.json({ message: 'Created' }); 
+            }
+        })(req, res, next);
+    });
+
+    app.post('/connexion', (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+        try {
+            req.body = JSON.parse(Object.keys(req.body)[0]);
+        } catch (err) {
+            req.body = req.body;
+        }
+        console.log("body parsing", req.body);
+
+        passport.authenticate('local-login', {
+            successRedirect: 'http://localhost:9200/#!/home', // redirect to the secure home section
             failureRedirect: 'http://localhost:9200/#!/signup', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         })(req, res, next);
     });
 
-    app.post('/connexion', passport.authenticate('local-login', {
-        successRedirect: 'http://localhost:9200/#!/home', // redirect to the secure home section
-        failureRedirect: 'http://localhost:9200/#!/signup', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }));
-
     app.get('/logout', (req, res) => {
         req.session.destroy((err) => {
             console.log("BYE");
-            //res.redirect('http://localhost:9200/#!/signup');
+            res.redirect('http://localhost:9200/#!/signup');
             // res.writeHead(302, {
             //     Location: 'http://localhost:9200/#!/signup'
             // });
-            res.send(err);
         });
         //req.logout();
         //res.redirect('http://localhost:9200/#!/signup');

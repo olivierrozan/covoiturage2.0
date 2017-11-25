@@ -50,8 +50,8 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
 
     function Menu($http, $state) {
         this.user = {
-            email: 'rozan.olivier@gmail.com',
-            password: 'OzTprP'
+            email: 'rozan.oler@gmail.com',
+            password: 'efficient'
         };
 
         this.result;
