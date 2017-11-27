@@ -70,11 +70,13 @@ export let pass = (passport) => {
     });
 
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        console.log('**SER**', user);
+        done(null, user.get());
     });
 
     passport.deserializeUser((id, done) => {
-        User.findById(id, (err, user) => {
+        console.log('**DESER**', id);
+        User.findById(id).then((err, user) => {
             done(err, user);
         });
     });
@@ -95,7 +97,7 @@ export let pass = (passport) => {
         User.findOne({ where: { email: req.body.email } }).then((user) => {
 
             if (user) {
-                return done(null, false,  req.flash('error', 'Oops! Wrong password.'));
+                return done(null, false, { message: 'Oops! Wrong password.' });
             } else {
                 // if there is no user with that username
                 // create the user
@@ -114,7 +116,6 @@ export let pass = (passport) => {
                     places: 66
                 };
 
-
                 User.create(newUserMysql).then((newUser, created) => {
                     return done(null, newUser ? newUser : false);
                 });
@@ -123,26 +124,25 @@ export let pass = (passport) => {
     })
     );
 
-    passport.use(
-        'local-login',
-        new LocalStrategy({
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true
-        },
-            (req, email, password, done) => {
-                // mail@mail.com    efficient
-                User.findOne({ where: { email: email } }).then((user) => {
-                    if (!user) {
-                        return done(null, false, { message: 'Incorrect username.' });
-                    }
+    passport.use('local-login', new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+    }, (req, email, password, done) => {
 
-                    if (!bcrypt.compareSync(password, user.password)) {
-                        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-                    }
-
-                    return done(null, user.get());
-                });
+        User.findOne({ where: { email: email } }).then((user, err) => {
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
             }
-        ));
+
+            if (!bcrypt.compareSync(password, user.get().password)) {
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            }
+
+            return done(null, user.get());
+        }).catch((err) => {
+            console.log("Error:", err);
+            return done(null, false, { message: 'Something went wrong with your Signin' });
+        });
+    }));
 }

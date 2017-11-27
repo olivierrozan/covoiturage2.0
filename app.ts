@@ -5,7 +5,8 @@ angular.module('main', [
     require('angular-animate'),
     require('angular-sanitize'),
     require('angular-material'),
-    require('angular-aria')
+    require('angular-aria'),
+    require('angular-cookies')
 ]);
 
 angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider) {
