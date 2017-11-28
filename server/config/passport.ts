@@ -2,67 +2,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt-nodejs');
 
-const seq = new Sequelize('covoiturage', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
-});
-
-seq
-    .authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-
 export let pass = (passport) => {
-    const User = seq.define('user', {
-        email: {
-            type: Sequelize.STRING
-        },
-        username: {
-            type: Sequelize.STRING
-        },
-        password: {
-            type: Sequelize.STRING
-        },
-        nom: {
-            type: Sequelize.STRING
-        },
-        prenom: {
-            type: Sequelize.STRING
-        },
-        adresse: {
-            type: Sequelize.STRING
-        },
-        codePostal: {
-            type: Sequelize.STRING
-        },
-        ville: {
-            type: Sequelize.STRING
-        },
-        tel: {
-            type: Sequelize.STRING
-        },
-        voiture: {
-            type: Sequelize.STRING
-        },
-        places: {
-            type: Sequelize.INTEGER
-        }
-    }, {
-            freezeTableName: true,
-            timestamps: false
-        });
-
+    const seq = require('./database').initDatabase(Sequelize);
+    const User = require('../models/Users').initUserModel(seq, Sequelize);
+    
     User.sync({ force: false }).then(() => {
         console.log('Nice! Database looks fine');
     }).catch(function (err) {
@@ -104,16 +47,16 @@ export let pass = (passport) => {
                 let userPassword = generateHash(req.body.password);
                 let newUserMysql = {
                     email: req.body.email,
-                    username: 'aaa',
+                    username: '',
                     password: userPassword,
                     nom: req.body.lastname,
                     prenom: req.body.firstname,
-                    adresse: 'aaa',
-                    codePostal: 'aaa',
-                    ville: 'aaa',
-                    tel: 'aaa',
-                    voiture: 'aaa',
-                    places: 66
+                    adresse: '',
+                    codePostal: '',
+                    ville: '',
+                    tel: '',
+                    voiture: '',
+                    places: 4
                 };
 
                 User.create(newUserMysql).then((newUser, created) => {
