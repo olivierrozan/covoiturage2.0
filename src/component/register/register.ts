@@ -2,15 +2,15 @@
 
 import * as angular from 'angular';
 
-angular.module('main').component('signup', {
-    template: require('./signup.html'),
+angular.module('main').component('register', {
+    template: require('./register.html'),
     bindings: {
 
     },
-    controller: class SignupCtrl {
+    controller: class RegisterCtrl {
 
         private user;
-        private signupForm;
+        private registerForm;
         private status;
 
         constructor(private $http: ng.IHttpService, private $state, private $mdToast) {
@@ -20,14 +20,14 @@ angular.module('main').component('signup', {
             };
         }
 
-        public signup() {
+        public register() {
             let config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
 
-            this.$http.post('http://localhost:9300/signup', this.user, config).then((response) => {
+            this.$http.post('http://localhost:9300/register', this.user, config).then((response) => {
                 this.status = response.data['message'];
 
                 if (this.status === 'Created') {
@@ -50,5 +50,5 @@ angular.module('main').component('signup', {
             });
         }
     },
-    controllerAs: 'signupCtrl'
+    controllerAs: 'registerCtrl'
 });

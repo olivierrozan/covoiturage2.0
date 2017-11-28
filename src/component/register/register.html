@@ -1,0 +1,54 @@
+<!-- !! A SUPPRIMER LORS DU DEPLOIEMENT !!
+jdurand : aaaaaa
+jduval : bbbbbb
+lahmad : cccccc
+Admin : admin59
+orozan : OzTprP -->
+
+<div layout="column" layout-margin flex layout-align="center center">
+    
+    <h2>Inscription</h2>
+    <form method="POST" id="signinForm" name="registerForm" layout="column" ng-submit="registerCtrl.register()" novalidate>
+        <div layout="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Prénom</label>
+                <input type="text" name="firstname" ng-model="registerCtrl.user.firstname" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                <div ng-messages="registerForm.firstname.$error" ng-show="registerForm.firstname.$invalid && registerForm.firstname.$touched" style="color:maroon" role="alert">
+                    <div ng-message="pattern">only letters required</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Nom</label>
+                <input type="text" name="lastname" ng-model="registerCtrl.user.lastname" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                <div ng-messages="registerForm.lastname.$error" ng-show="registerForm.lastname.$invalid && registerForm.lastname.$touched" style="color:maroon" role="alert">
+                    <div ng-message="pattern">only letters required</div>
+                </div>
+            </md-input-container>
+        </div>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input type="email" name="email" ng-model="registerCtrl.user.email" required/>
+            <div ng-messages="registerForm.email.$error" ng-show="registerForm.email.$invalid && registerForm.email.$touched" style="color:maroon" role="alert" required>
+                <div ng-message="required">You did not enter a field</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Mot de passe</label>
+            <input type="password" name="password" ng-model="registerCtrl.user.password" ng-pattern="/^[a-zA-Z0-9]{8,16}$/i" required/>
+            <div ng-messages="registerForm.password.$error" ng-show="registerForm.password.$invalid && registerForm.password.$touched" style="color:maroon" role="alert">
+                <div ng-message="pattern">Incorrect password (numbers, letters, between 8 and 16)</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Répéter mot de passe</label>
+            <input register-validator ref="{{registerCtrl.user.password}}" type="password" name="passwordCheck" ng-model="passwordCheck" required/>
+            <div ng-messages="registerForm.passwordCheck.$error" ng-show="registerForm.passwordCheck.$invalid && registerForm.passwordCheck.$touched" style="color:maroon" role="alert">
+                <div ng-message="diff">Different passwords</div>
+            </div>
+        </md-input-container>
+
+        <input id="signinButton" type="submit" class="md-raised md-primary md-button md-ink-ripple" value="S'inscrire" ng-disabled="!registerForm.$valid"
+        />
+    </form>
+</div>

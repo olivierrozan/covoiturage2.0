@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 export let allRoutes = (app, passport, urlencodedParser) => {
 
-    app.post('/signup', (req, res, next) => {
+    app.post('/register', (req, res, next) => {
         // res.header('Access-Control-Allow-Credentials', true);
         // res.header("Access-Control-Allow-Origin", "*");
         // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -14,7 +14,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         }
         console.log("body parsing", req.body);
 
-        passport.authenticate('local-signup', (err, user) => {
+        passport.authenticate('local-register', (err, user) => {
             console.log('*-register-*', user);
             if (err) {
                 return next(err);
@@ -99,7 +99,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         req.session.destroy((err) => {
             console.log("BYE");
             //res.clearCookie('connect.sid');
-            res.redirect('http://localhost:9200/#!/signup');
+            res.redirect('http://localhost:9200/#!/register');
         });
     });
 
@@ -114,7 +114,7 @@ function isLoggedIn(req, res, next) {
     } else {
         console.log("NOT authenticated");
         res.writeHead(302, {
-            Location: 'http://localhost:9200/#!/signup'
+            Location: 'http://localhost:9200/#!/register'
         });
         res.end();
     }

@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 
-angular.module('main').directive('signupValidator', [() => {
+angular.module('main').directive('registerValidator', [() => {
     return {
         restrict: 'A',
         require: 'ngModel',

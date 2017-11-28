@@ -20,7 +20,7 @@ angular.module('main').component('home', {
         public logout() {
             this.$http.get('http://localhost:9300/logout').then((response) => {
                 console.log("BYEBYE");
-                this.$state.go('signup');
+                this.$state.go('register');
             }).then((error) => {
                 return error;
             });

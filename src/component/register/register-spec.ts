@@ -1,4 +1,4 @@
-describe('signup', function() {
+describe('register', function() {
 
   beforeEach(angular.mock.module('main'));
 
@@ -13,7 +13,7 @@ describe('signup', function() {
     /* 
     var bindings = {};
     var injectionOverrides = {};
-    var ctrl = $componentController('signup', injectionOverrides, bindings);
+    var ctrl = $componentController('register', injectionOverrides, bindings);
     ... now test ctrl ...
     */
 

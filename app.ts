@@ -11,9 +11,9 @@ angular.module('main', [
 
 angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
-    $stateProvider.state('signup', {
-        url: '/signup',
-        template: '<signup></signup>'
+    $stateProvider.state('register', {
+        url: '/register',
+        template: '<register></register>'
     });
 
     $stateProvider.state('home', {
@@ -22,5 +22,5 @@ angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qPr
     });
 
     /* Add New Routes Above */
-    $urlRouterProvider.otherwise('/signup');
+    $urlRouterProvider.otherwise('/register');
 });
