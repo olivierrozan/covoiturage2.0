@@ -3,7 +3,7 @@ import './index.scss';
 
 import './node_modules/angular-material/angular-material.js'
 import './node_modules/angular-material/angular-material.scss'
-import './src/service/login/loginService';
+import './src/service/signin/signinService';
 import './src/component/signup/signup';
 import './src/component/signup/signup.scss';
 import './src/directive/menu/menu';

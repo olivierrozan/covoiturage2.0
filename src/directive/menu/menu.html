@@ -1,16 +1,16 @@
 <div id="menu" layout="row">
     <h1 style="margin-left: 10px;" flex="60">CoVoiturage</h1>
 
-    <form method="POST" flex="33" layout="row" ng-submit="loginCtrl.login()" layout-align="end start">
+    <form method="POST" flex="33" layout="row" ng-submit="signinCtrl.signin()" layout-align="end start">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Adresse mail</label>
-            <input type="text" name="email" ng-model="loginCtrl.user.email"/>
+            <input type="text" name="email" ng-model="signinCtrl.user.email"/>
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Mot de passe</label>
-            <input type="password" name="password" ng-model="loginCtrl.user.password" />
+            <input type="password" name="password" ng-model="signinCtrl.user.password" />
         </md-input-container>
         
-        <input style="margin-top: 15px;" type="submit" aria-label="loginButton" class="md-raised md-primary md-button md-ink-ripple" value="Se connecter">
+        <input style="margin-top: 15px;" type="submit" aria-label="signinButton" class="md-raised md-primary md-button md-ink-ripple" value="Se connecter">
     </form>
 </div>

@@ -8,7 +8,7 @@ orozan : OzTprP -->
 <div layout="column" layout-margin flex layout-align="center center">
     
     <h2>Inscription</h2>
-    <form method="POST" id="loginForm" name="signupForm" layout="column" ng-submit="signupCtrl.signup()" novalidate>
+    <form method="POST" id="signinForm" name="signupForm" layout="column" ng-submit="signupCtrl.signup()" novalidate>
         <div layout="row">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Prénom</label>
@@ -48,7 +48,7 @@ orozan : OzTprP -->
             </div>
         </md-input-container>
 
-        <input id="loginButton" type="submit" class="md-raised md-primary md-button md-ink-ripple" value="S'inscrire" ng-disabled="!signupForm.$valid"
+        <input id="signinButton" type="submit" class="md-raised md-primary md-button md-ink-ripple" value="S'inscrire" ng-disabled="!signupForm.$valid"
         />
     </form>
 </div>

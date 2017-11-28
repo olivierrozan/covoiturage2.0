@@ -1,35 +1,5 @@
 import * as angular from 'angular';
-import { LoginService } from '../../service/login/loginService';
-
-/*class Menu {
-
-    public user;
-
-    constructor(private $http: ng.IHttpService, private loginService: LoginService, scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, controller: {}, transclude: ng.ITranscludeFunction) {
-        this.user = {
-            email: 'rozan.olivier@gmail.com',
-            password: 'OzTprP'
-        };
-    }
-
-    public login() {
-        let config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        };
-
-        this.$http.get('http://localhost:9300/connexion').then((data) => {
-            var response = data;
-            console.log('HELLO: ', response);
-            return response;
-        }).then((error) => {
-            return error;
-        });
-
-        console.log("LOGIN");
-    }
-}*/
+import { SigninService } from '../../service/signin/signinService';
 
 angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
     return {
@@ -41,7 +11,7 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
         template: require('./menu.html'),
         link: link,
         controller: Menu,
-        controllerAs: 'loginCtrl'
+        controllerAs: 'signinCtrl'
     };
 
     function link(scope, element, attrs) {
@@ -56,7 +26,7 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
 
         this.result;
 
-        this.login = () => {
+        this.signin = () => {
             let config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

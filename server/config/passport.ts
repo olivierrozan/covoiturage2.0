@@ -28,7 +28,7 @@ export let pass = (passport) => {
         email: {
             type: Sequelize.STRING
         },
-        login: {
+        username: {
             type: Sequelize.STRING
         },
         password: {
@@ -70,14 +70,14 @@ export let pass = (passport) => {
     });
 
     passport.serializeUser((user, done) => {
-        console.log('**SER**', user);
-        done(null, user.get());
+        console.log('**SER**', user.id);
+        done(null, user.id);
     });
 
     passport.deserializeUser((id, done) => {
         console.log('**DESER**', id);
-        User.findById(id).then((err, user) => {
-            done(err, user);
+        User.findById(id).then((user) => {
+            done(null, user.get());
         });
     });
 
@@ -104,7 +104,7 @@ export let pass = (passport) => {
                 let userPassword = generateHash(req.body.password);
                 let newUserMysql = {
                     email: req.body.email,
-                    login: 'aaa',
+                    username: 'aaa',
                     password: userPassword,
                     nom: req.body.lastname,
                     prenom: req.body.firstname,
@@ -124,7 +124,7 @@ export let pass = (passport) => {
     })
     );
 
-    passport.use('local-login', new LocalStrategy({
+    passport.use('local-signin', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true

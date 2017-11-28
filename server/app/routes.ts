@@ -3,9 +3,9 @@ const nodemailer = require('nodemailer');
 export let allRoutes = (app, passport, urlencodedParser) => {
 
     app.post('/signup', (req, res, next) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        // res.header('Access-Control-Allow-Credentials', true);
+        // res.header("Access-Control-Allow-Origin", "*");
+        // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
@@ -83,11 +83,15 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         }
         console.log("body parsing", req.body);
 
-        passport.authenticate('local-login', (err, user) => {
-            console.log('--user--', user.id);
-            req.logIn(user, function (err) { // <-- Log user in
-                return res.redirect('http://localhost:9200/#!/home');
-            });
+        passport.authenticate('local-signin', (err, user) => {
+            if (user) {
+                console.log('--user--', user.id);
+                
+                req.logIn(user, function(err) {
+                    if (err) { return next(err); }
+                    return res.send({ success : true, message : 'Login efetivado com sucesso', user: user });
+                });
+            }
         })(req, res, next);
     });
 
@@ -103,12 +107,12 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 }
 
 function isLoggedIn(req, res, next) {
+    console.log("auth? ", req.isAuthenticated(), req.session);
     if (req.isAuthenticated()) {
-        console.log("TRY HOME", req.isAuthenticated());
-        res.json({ session: true });
+        console.log("TRY HOME");
         return next();
     } else {
-        console.log("NOT authenticated", req.isAuthenticated(), req.user);
+        console.log("NOT authenticated");
         res.writeHead(302, {
             Location: 'http://localhost:9200/#!/signup'
         });
