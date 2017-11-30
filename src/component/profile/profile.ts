@@ -2,16 +2,16 @@ import * as angular from 'angular';
 
 angular.module('app', ['ngCookies']);
 
-angular.module('main').component('home', {
-    template: require('./home.html'),
+angular.module('main').component('profile', {
+    template: require('./profile.html'),
     bindings: {
 
     },
-    controller: class HomeCtrl {
+    controller: class ProfileCtrl {
 
         constructor(private $http: ng.IHttpService, private $state, private $cookies) {
-            this.$http.get('http://localhost:9300/home').then((response) => {
-                console.log("home", this.$cookies.getAll());
+            this.$http.get('http://localhost:9300/profile').then((response) => {
+                console.log("profile", this.$cookies.getAll());
             }).then((error) => {
                 return error;
             });
@@ -26,5 +26,5 @@ angular.module('main').component('home', {
             });
         }
     },
-    controllerAs: 'homeCtrl'
+    controllerAs: 'profileCtrl'
 });

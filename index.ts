@@ -7,5 +7,5 @@ import './src/service/signin/signinService';
 import './src/component/register/register';
 import './src/component/register/register.scss';
 import './src/directive/menu/menu';
-import './src/component/home/home';
+import './src/component/profile/profile';
 import './src/directive/registerValidator/registerValidator';

@@ -16,9 +16,9 @@ angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qPr
         template: '<register></register>'
     });
 
-    $stateProvider.state('home', {
-        url: '/home',
-        template: '<home></home>'
+    $stateProvider.state('profile', {
+        url: '/profile',
+        template: '<profile></profile>'
     });
 
     /* Add New Routes Above */

@@ -1,4 +1,4 @@
-describe('home', function() {
+describe('profile', function() {
 
   beforeEach(angular.mock.module('main'));
 
@@ -13,7 +13,7 @@ describe('home', function() {
     /* 
     var bindings = {};
     var injectionOverrides = {};
-    var ctrl = $componentController('home', injectionOverrides, bindings);
+    var ctrl = $componentController('profile', injectionOverrides, bindings);
     ... now test ctrl ...
     */
 

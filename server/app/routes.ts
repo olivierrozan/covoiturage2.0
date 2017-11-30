@@ -103,7 +103,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         });
     });
 
-    app.get("/home", isLoggedIn);
+    app.get("/profile", isLoggedIn);
 }
 
 function isLoggedIn(req, res, next) {

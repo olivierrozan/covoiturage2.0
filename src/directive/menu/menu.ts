@@ -36,7 +36,7 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
     
             $http.post('http://localhost:9300/connexion', this.user, config).then((response) => {
                 if (response) {
-                    $state.go('home');
+                    $state.go('profile');
                 }
             }).then((error) => {
                 return error;
