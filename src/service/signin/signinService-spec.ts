@@ -1,12 +1,12 @@
-import {LoginService} from './LoginService';
+import {SigninService} from './SigninService';
 
-describe('LoginService', function() {
+describe('SigninService', function() {
 
   beforeEach(angular.mock.module('main'));
 
-  it('should ...', inject(function(LoginService:LoginService) {
+  it('should ...', inject(function(SigninService:SigninService) {
 
-    //expect(LoginService.doSomething()).toEqual('something');
+    //expect(SigninService.doSomething()).toEqual('something');
 
   }));
 

@@ -1,16 +1,51 @@
 <div id="menu" layout="row">
-    <h1 style="margin-left: 10px;" flex="60">CoVoiturage</h1>
+    <h1 style="margin-left: 10px;" flex="50" ng-click="signinCtrl.isAuth=!signinCtrl.isAuth">CoVoiturage</h1>
 
-    <form method="POST" flex="33" layout="row" ng-submit="signinCtrl.signin()" layout-align="end start">
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Adresse mail</label>
-            <input type="text" name="email" ng-model="signinCtrl.user.email"/>
-        </md-input-container>
-        <md-input-container class="md-block" flex-gt-sm>
-            <label>Mot de passe</label>
-            <input type="password" name="password" ng-model="signinCtrl.user.password" />
-        </md-input-container>
-        
-        <input style="margin-top: 15px;" type="submit" aria-label="signinButton" class="md-raised md-primary md-button md-ink-ripple" value="Se connecter">
-    </form>
+    <div ng-if="!signinCtrl.isAuth">
+        <form method="POST" layout="row" ng-submit="signinCtrl.signin()" layout-align="end start">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Adresse mail</label>
+                <input type="text" name="email" ng-model="signinCtrl.user.email" />
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Mot de passe</label>
+                <input type="password" name="password" ng-model="signinCtrl.user.password" />
+            </md-input-container>
+
+            <input style="margin-top: 15px;" type="submit" aria-label="signinButton" class="md-raised md-primary md-button md-ink-ripple"
+                value="Se connecter">
+        </form>
+    </div>
+
+    <md-menu-bar ng-if="signinCtrl.isAuth" flex="50" layout-align="end start" flex-gt-sm>
+        <button ng-click="$mdMenu.open()">
+            Recherche
+        </button>
+        <button ng-click="$mdMenu.open()">
+            Ajout Offre
+        </button>
+        <md-menu md-offset="-100 0">
+            <button ng-click="$mdMenu.open()">
+                USER
+            </button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button style="font-size: 20px;" ng-click="ctrl.sampleAction('share', $event)">
+                        Profil
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button style="font-size: 20px;" ng-click="ctrl.sampleAction('share', $event)">
+                        Mes offres
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                    <md-button style="font-size: 20px;" ng-click="ctrl.sampleAction('share', $event)">
+                        Se déconnecter
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-menu-bar>
 </div>
