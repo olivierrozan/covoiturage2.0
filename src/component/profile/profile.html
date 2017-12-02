@@ -1,4 +1,28 @@
-<div>
-    PROFIL
-    <md-button ng-click="profileCtrl.logout()">logout</md-button>
+<div layout="row">
+    <div id="aside" flex="25" layout="column">
+        <div layout="row">
+            <div class="profilName">{{ profileCtrl.user.firstname }} {{ profileCtrl.user.lastname }}</div>
+
+            <!-- <md-button aria-label="Android" class="md-icon-button"> -->
+                <md-icon class="icon" md-svg-icon="pencil" ng-click="profileCtrl.edit()"></md-icon>
+            <!-- </md-button> -->
+        </div>
+        <a href="#">
+            <div class="persoInfo">Modifier le mot de passe</div>
+        </a>
+
+        <div id="photo"></div>
+        <div class="persoInfo">{{ profileCtrl.user.address }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.cp }} {{ profileCtrl.user.ville }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.tel }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.email }}</div>
+
+        <div class="profilName" style="margin-top: 30px; margin-bottom: 30px;">Véhicule</div>
+        <div class="persoInfo">{{ profileCtrl.user.vehicle }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.nbPlaces }} places disponibles</div>
+    </div>
+
+    <div id="section" flex="75">
+        <div id="offerTitle">Mes offres</div>
+    </div>
 </div>

@@ -27,6 +27,10 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
         this.result;
         this.isAuth = true;
 
+        if (this.isAuth) {
+            $state.go('profile');
+        }
+
         this.signin = () => {
             let config = {
                 headers: {

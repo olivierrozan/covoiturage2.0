@@ -1,0 +1,44 @@
+#aside {
+    background: #2196F3;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+#offerTitle {
+    text-align: center;
+}
+
+.profilName {
+    // text-align: center;
+    padding-left: 60px;
+    color: white;
+    font-size: 24px;
+}
+
+.icon {
+    fill: white;
+    padding: 0px !important;
+    cursor: pointer;
+    transition: fill 0.25s;
+}
+
+.icon:hover {
+    fill: #1565C0;
+}
+
+.persoInfo {
+    color: white;
+    padding-left: 60px;
+    margin-top: 10px;
+}
+
+#section {
+    height: 100%;
+}
+
+#photo {
+    background: white; 
+    width: 120px; 
+    height: 120px;
+    margin: 10px 60px;
+}

@@ -9,8 +9,9 @@ angular.module('main', [
     require('angular-cookies')
 ]);
 
-angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider) {
+angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) {
     $qProvider.errorOnUnhandledRejections(false);
+    $mdIconProvider.defaultIconSet('assets/mdi.svg');
     $stateProvider.state('register', {
         url: '/register',
         template: '<register></register>'

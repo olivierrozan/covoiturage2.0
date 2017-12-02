@@ -15,7 +15,15 @@ module.exports = {
         failOnError: true
     }*/,
     plugins: [
-        new CopyWebpackPlugin([{ from: 'index.html', to: '.' }])
+        new CopyWebpackPlugin([
+            {
+                from: 'index.html',
+                to: '.'
+            }, {
+                from: 'node_modules/angular-mdi-svg/mdi.svg',
+                to: 'assets/mdi.svg'
+            }
+        ])
     ],
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.

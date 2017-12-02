@@ -1,5 +1,5 @@
 <div id="menu" layout="row">
-    <h1 style="margin-left: 10px;" flex="50" ng-click="signinCtrl.isAuth=!signinCtrl.isAuth">CoVoiturage</h1>
+    <h1 id="title" flex="50" ng-click="signinCtrl.isAuth=!signinCtrl.isAuth">CoVoiturage</h1>
 
     <div ng-if="!signinCtrl.isAuth">
         <form method="POST" layout="row" ng-submit="signinCtrl.signin()" layout-align="end start">
@@ -31,7 +31,7 @@
             <md-menu-content width="4">
                 <md-menu-item>
                     <md-button style="font-size: 20px;" ng-click="ctrl.sampleAction('share', $event)">
-                        profile
+                        Mon profil
                     </md-button>
                 </md-menu-item>
                 <md-menu-item>

@@ -1,3 +1,8 @@
+#title {
+    margin: 0px;
+    padding: 10px;
+}
+
 #menu {
     background-color: #2196F3;
     color: #ffffff;
@@ -6,8 +11,8 @@
 
 md-menu-bar button, md-menu button {
     font-size: 20px !important;
-    margin: 0px 20px !important;
-    
+    margin: 0px 10px !important;
+    height: 60px !important;
     color: white;
     transition: color 0.2s;
 }
