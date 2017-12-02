@@ -1,4 +1,7 @@
 const nodemailer = require('nodemailer');
+const Sequelize = require('sequelize');
+const seq = require('../config/database').initDatabase(Sequelize);
+const User = require('../models/Users').initUserModel(seq, Sequelize);
 
 export let allRoutes = (app, passport, urlencodedParser) => {
 
@@ -103,11 +106,17 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         });
     });
 
-    app.get("/profile", isLoggedIn);
+    app.get("/profile"/*, isLoggedIn*/, (req, res) => {
+        User.find({ where: { email: 'rozan.olivier@gmail.com' } }).then((user) => {
+            console.log("profil user: ");
+            return res.json({ user: user.get() });
+        });
+    });
 }
 
 function isLoggedIn(req, res, next) {
     console.log("auth? ", req.isAuthenticated(), req.session);
+
     if (req.isAuthenticated()) {
         console.log("TRY HOME");
         return next();
@@ -118,4 +127,5 @@ function isLoggedIn(req, res, next) {
         });
         res.end();
     }
+    next();
 }

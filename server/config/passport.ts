@@ -47,7 +47,6 @@ export let pass = (passport) => {
                 let userPassword = generateHash(req.body.password);
                 let newUserMysql = {
                     email: req.body.email,
-                    username: '',
                     password: userPassword,
                     nom: req.body.lastname,
                     prenom: req.body.firstname,

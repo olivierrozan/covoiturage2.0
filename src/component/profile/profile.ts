@@ -13,22 +13,10 @@ angular.module('main').component('profile', {
         
         constructor(private $http: ng.IHttpService, private $state, private $cookies) {
             this.$http.get('http://localhost:9300/profile').then((response) => {
-                console.log("profile");
+                this.user = response.data['user'];
             }).then((error) => {
                 return error;
             });
-
-            this.user = {
-                firstname: 'Olivier',
-                lastname: 'ROZAN',
-                address: '16 rue des Aubépines',
-                cp: '59121',
-                ville: 'Haulchin',
-                tel: '07.77.22.21.05',
-                email: 'rozan.olivier@gmail.com',
-                vehicle: 'Renault Twingo',
-                nbPlaces: 4
-            };
         }
 
         public edit() {

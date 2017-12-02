@@ -1,7 +1,7 @@
 <div layout="row">
     <div id="aside" flex="25" layout="column">
         <div layout="row">
-            <div class="profilName">{{ profileCtrl.user.firstname }} {{ profileCtrl.user.lastname }}</div>
+            <div class="profilName">{{ profileCtrl.user.prenom }} {{ profileCtrl.user.nom }}</div>
 
             <!-- <md-button aria-label="Android" class="md-icon-button"> -->
                 <md-icon class="icon" md-svg-icon="pencil" ng-click="profileCtrl.edit()"></md-icon>
@@ -12,14 +12,14 @@
         </a>
 
         <div id="photo"></div>
-        <div class="persoInfo">{{ profileCtrl.user.address }}</div>
-        <div class="persoInfo">{{ profileCtrl.user.cp }} {{ profileCtrl.user.ville }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.adresse }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.codePostal }} {{ profileCtrl.user.ville }}</div>
         <div class="persoInfo">{{ profileCtrl.user.tel }}</div>
         <div class="persoInfo">{{ profileCtrl.user.email }}</div>
 
         <div class="profilName" style="margin-top: 30px; margin-bottom: 30px;">Véhicule</div>
-        <div class="persoInfo">{{ profileCtrl.user.vehicle }}</div>
-        <div class="persoInfo">{{ profileCtrl.user.nbPlaces }} places disponibles</div>
+        <div class="persoInfo">{{ profileCtrl.user.voiture }}</div>
+        <div class="persoInfo">{{ profileCtrl.user.places }} places disponibles</div>
     </div>
 
     <div id="section" flex="75">
