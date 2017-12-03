@@ -1,10 +1,15 @@
 const nodemailer = require('nodemailer');
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt-nodejs');
 const seq = require('../config/database').initDatabase(Sequelize);
 const User = require('../models/Users').initUserModel(seq, Sequelize);
 
 export let allRoutes = (app, passport, urlencodedParser) => {
 
+    let generateHash = (password) => {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    };
+    
     app.post('/register', (req, res, next) => {
         // res.header('Access-Control-Allow-Credentials', true);
         // res.header("Access-Control-Allow-Origin", "*");
@@ -124,12 +129,13 @@ export let allRoutes = (app, passport, urlencodedParser) => {
             req.body = req.body;
         }
         console.log("body parsing", req.body);
+        let userPassword = generateHash(req.body.password);
 
         // update sequelize
         User.update(
-            {password: req.body.password}, {where: { email: 'rozan.oler@gmail.com' }}
+            {password: userPassword}, {where: { email: 'rozan.oler@gmail.com' }}
         ).then(() => {
-              console.log('password change ok', req.body.password);
+              console.log('password change ok', userPassword);
           })
     });
 }
