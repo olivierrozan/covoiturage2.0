@@ -10,8 +10,8 @@ angular.module('main').component('profile', {
     controller: class ProfileCtrl {
 
         private user;
-        
-        constructor(private $http: ng.IHttpService, private $state, private $cookies) {
+
+        constructor(private $http: ng.IHttpService, private $state, private $mdDialog) {
             this.$http.get('http://localhost:9300/profile').then((response) => {
                 this.user = response.data['user'];
             }).then((error) => {
@@ -19,9 +19,19 @@ angular.module('main').component('profile', {
             });
         }
 
-        public edit() {
-            console.log("ok");
-        }
+        public showPasswordDialog(ev) {
+            this.$mdDialog.show({
+                templateUrl: './src/component/profile/passwordChange.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            })
+                .then(function (answer) {
+                    console.log('You said the information was "' + answer + '".');
+                }, function () {
+                    console.log('You cancelled the dialog.');
+                });
+        };
 
         public logout() {
             this.$http.get('http://localhost:9300/logout').then((response) => {

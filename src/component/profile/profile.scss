@@ -15,6 +15,15 @@
     font-size: 24px;
 }
 
+.passwordChangeButton {
+    padding: 0px !important;
+    transition: color 0.25s;
+}
+
+.passwordChangeButton:hover {
+    color: #1565C0;
+}
+
 .icon {
     fill: white;
     padding: 0px !important;

@@ -4,12 +4,12 @@
             <div class="profilName">{{ profileCtrl.user.prenom }} {{ profileCtrl.user.nom }}</div>
 
             <!-- <md-button aria-label="Android" class="md-icon-button"> -->
-                <md-icon class="icon" md-svg-icon="pencil" ng-click="profileCtrl.edit()"></md-icon>
+                <md-icon class="icon" md-svg-icon="pencil"></md-icon>
             <!-- </md-button> -->
         </div>
-        <a href="#">
-            <div class="persoInfo">Modifier le mot de passe</div>
-        </a>
+        <md-button ng-click="profileCtrl.showPasswordDialog($event)">
+            <div class="persoInfo passwordChangeButton">Modifier le mot de passe</div>
+        </md-button>
 
         <div id="photo"></div>
         <div class="persoInfo">{{ profileCtrl.user.adresse }}</div>
