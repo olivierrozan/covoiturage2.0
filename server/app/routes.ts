@@ -112,6 +112,26 @@ export let allRoutes = (app, passport, urlencodedParser) => {
             return res.json({ user: user.get() });
         });
     });
+
+    app.post('/changePassword', (req, res, next) => {
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+        try {
+            req.body = JSON.parse(Object.keys(req.body)[0]);
+        } catch (err) {
+            req.body = req.body;
+        }
+        console.log("body parsing", req.body);
+
+        // update sequelize
+        User.update(
+            {password: req.body.password}, {where: { email: 'rozan.oler@gmail.com' }}
+        ).then(() => {
+              console.log('password change ok', req.body.password);
+          })
+    });
 }
 
 function isLoggedIn(req, res, next) {
