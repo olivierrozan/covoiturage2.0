@@ -7,9 +7,9 @@ const User = require('../models/Users').initUserModel(seq, Sequelize);
 export let allRoutes = (app, passport, urlencodedParser) => {
 
     let generateHash = (password) => {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+        return bcrypt.hashSync(password);
     };
-    
+
     app.post('/register', (req, res, next) => {
         // res.header('Access-Control-Allow-Credentials', true);
         // res.header("Access-Control-Allow-Origin", "*");
@@ -94,10 +94,10 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         passport.authenticate('local-signin', (err, user) => {
             if (user) {
                 console.log('--user--', user.id);
-                
-                req.logIn(user, function(err) {
+
+                req.logIn(user, function (err) {
                     if (err) { return next(err); }
-                    return res.send({ success : true, message : 'Login efetivado com sucesso', user: user });
+                    return res.send({ success: true, message: 'Login efetivado com sucesso', user: user });
                 });
             }
         })(req, res, next);
@@ -129,14 +129,24 @@ export let allRoutes = (app, passport, urlencodedParser) => {
             req.body = req.body;
         }
         console.log("body parsing", req.body);
-        let userPassword = generateHash(req.body.password);
+        let userPassword = generateHash(req.body.newPassword);
 
-        // update sequelize
-        User.update(
-            {password: userPassword}, {where: { email: 'rozan.oler@gmail.com' }}
-        ).then(() => {
-              console.log('password change ok', userPassword);
-          })
+        User.findOne({ where: { email: 'rozan.oler@gmail.com' } }).then((user, err) => {
+            if (bcrypt.compareSync(req.body.currentPassword, user.get().password)) {
+                // update sequelize
+                User.update(
+                    { password: userPassword }, { where: { email: 'rozan.oler@gmail.com' } }
+                ).then(() => {
+                    console.log('password change ok', userPassword);
+                });
+                console.log('password change ok', userPassword);
+            } else {
+                console.log('Error password change: Invalid current password');
+            }
+            
+        }).catch((err) => {
+            // console.log("Error:", err);
+        });
     });
 }
 

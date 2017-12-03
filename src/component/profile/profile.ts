@@ -42,7 +42,10 @@ angular.module('main').component('profile', {
                 }
             };
 
-            this.$http.post('http://localhost:9300/changePassword', { password: this.user.newPassword }, config).then((response) => {
+            this.$http.post('http://localhost:9300/changePassword', { 
+                currentPassword: this.user.currentPassword, 
+                newPassword: this.user.newPassword 
+            }, config).then((response) => {
 
                 this.$mdToast.show(
                     this.$mdToast.simple()
