@@ -20,9 +20,24 @@ angular.module('main').component('profile', {
             });
         }
 
+        public showUpdateProfileDialog(ev) {
+            this.$mdDialog.show({
+                templateUrl: './src/component/profile/updateProfile.html',
+                controller: ProfileCtrl,
+                controllerAs: 'profileCtrl',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            }).then((answer) => {
+                console.log('User modifié !');
+            }, (err) => {
+                console.log('Modifications annulées.');
+            });
+        };
+
         public showPasswordDialog(ev) {
             this.$mdDialog.show({
-                templateUrl: './src/component/profile/passwordChange.html',
+                templateUrl: './src/component/profile/updatePassword.html',
                 controller: ProfileCtrl,
                 controllerAs: 'profileCtrl',
                 parent: angular.element(document.body),
