@@ -10,6 +10,7 @@ angular.module('main').component('profile', {
     controller: class ProfileCtrl {
 
         private user;
+        private status: String;
 
         constructor(private $http: ng.IHttpService, private $state, private $mdDialog, private $scope: ng.IScope, private $mdToast) {
             this.$http.get('http://localhost:9300/profile').then((response) => {
@@ -27,12 +28,11 @@ angular.module('main').component('profile', {
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
-            })
-                .then(function (answer) {
-                    console.log('You said the information was "' + answer + '".');
-                }, function () {
-                    console.log('You cancelled the dialog.');
-                });
+            }).then((answer) => {
+                console.log('Mot de passe modifié !');
+            }, (err) => {
+                console.log('Changement de mot de passe annulé.');
+            });
         };
 
         public validatePasswordChange() {
@@ -41,22 +41,36 @@ angular.module('main').component('profile', {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-
-            this.$http.post('http://localhost:9300/changePassword', { 
-                currentPassword: this.user.currentPassword, 
-                newPassword: this.user.newPassword 
+            
+            this.$http.post('http://localhost:9300/changePassword', {
+                currentPassword: this.user.currentPassword,
+                newPassword: this.user.newPassword
             }, config).then((response) => {
+                this.status = response.data['message'];
+                let message = '';
+                if (this.status === 'success') {
+                    message = 'Mot de passe modifié !'
+                    this.$mdDialog.hide();
+                } else {
+                    message = "Erreur: Mot de passe incorrect !";
+                }
 
                 this.$mdToast.show(
                     this.$mdToast.simple()
-                        .textContent("Mot de passe modifié !")
-                        .position('bottom left')
-                        .hideDelay(3000)
+                    .textContent(message)
+                    .position('bottom left')
+                    .hideDelay(3000)
                 );
-
+                
             }).then((error) => {
                 return error;
             });
+            
+            
+        }
+
+        public closeDialog() {
+            this.$mdDialog.cancel();
         }
 
         public logout() {

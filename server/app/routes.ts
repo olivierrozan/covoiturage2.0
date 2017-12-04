@@ -140,12 +140,14 @@ export let allRoutes = (app, passport, urlencodedParser) => {
                     console.log('password change ok', userPassword);
                 });
                 console.log('password change ok', userPassword);
+                return res.json({message: 'success'});
             } else {
                 console.log('Error password change: Invalid current password');
+                return res.json({message: 'error'});
             }
             
         }).catch((err) => {
-            // console.log("Error:", err);
+            console.log("Error:", err);
         });
     });
 }
