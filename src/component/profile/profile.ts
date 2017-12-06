@@ -35,9 +35,48 @@ angular.module('main').component('profile', {
         public showUpdateProfileDialog(ev) {
             this.$mdDialog.show({
                 templateUrl: './src/component/profile/updateProfile.html',
-                bindToController:true,
-                controller: ProfileCtrl,
-                controllerAs: 'profileCtrl',
+                locals: {data: this.user, dialog: this.$mdDialog, http: this.$http, state: this.$state, toast: this.$mdToast},
+                controller: function UpdateProfileController(data, dialog, http, state, toast) {
+                    this.user = data;
+                    
+                    this.config = {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    };
+
+                    this.validateUpdateProfile = () => {
+                        console.log("toto", this.user);
+                        http.post('http://localhost:9300/updateProfile', this.user, this.config).then((response) => {
+                            this.status = response.data['message'];
+                            let message = '';
+                            if (this.status === 'success') {
+                                message = 'Profil modifié !'
+                                dialog.hide();
+                            } else {
+                                message = "Erreur: Le profil n'a pas été modifié !";
+                            }
+            
+                            toast.show(
+                                toast.simple()
+                                .textContent(message)
+                                .position('bottom left')
+                                .hideDelay(3000)
+                            );
+                            
+                            dialog.hide();
+                            
+                        }).then((error) => {
+                            return error;
+                        });
+                        state.go('profile');
+                    }
+
+                    this.closeDialog = () => {
+                        dialog.cancel();
+                    }
+                },
+                controllerAs: 'updateProfileCtrl',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
@@ -64,7 +103,6 @@ angular.module('main').component('profile', {
         };
 
         public validatePasswordChange() {
-            
             this.$http.post('http://localhost:9300/changePassword', {
                 currentPassword: this.user.currentPassword,
                 newPassword: this.user.newPassword
@@ -88,33 +126,6 @@ angular.module('main').component('profile', {
             }).then((error) => {
                 return error;
             });
-        }
-
-        public validateUpdateProfile() {
-            
-            this.$http.post('http://localhost:9300/updateProfile', this.user, this.config).then((response) => {
-                this.status = response.data['message'];
-                let message = '';
-                if (this.status === 'success') {
-                    message = 'Profil modifié !'
-                    this.$mdDialog.hide();
-                } else {
-                    message = "Erreur: Le profil n'a pas été modifié !";
-                }
-
-                this.$mdToast.show(
-                    this.$mdToast.simple()
-                    .textContent(message)
-                    .position('bottom left')
-                    .hideDelay(3000)
-                );
-                
-                this.$mdDialog.hide();
-                
-            }).then((error) => {
-                return error;
-            });
-            this.$state.go('profile');
         }
 
         public closeDialog() {

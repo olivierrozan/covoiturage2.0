@@ -11,7 +11,7 @@
             <div layout="row">
                 <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                     <label>Prénom</label>
-                    <input type="text" name="firstname" ng-model="profileCtrl.user.prenom" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                    <input type="text" name="firstname" ng-model="updateProfileCtrl.user.prenom" ng-pattern="/^[a-zA-Z '-]+$/i" />
                     <div ng-messages="updateProfileForm.firstname.$error" ng-show="updateProfileForm.firstname.$invalid && updateProfileForm.firstname.$touched"
                         style="color:maroon" role="alert">
                         <div ng-message="pattern">only letters required</div>
@@ -19,7 +19,7 @@
                 </md-input-container>
                 <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                     <label>Nom</label>
-                    <input type="text" name="lastname" ng-model="profileCtrl.user.nom" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                    <input type="text" name="lastname" ng-model="updateProfileCtrl.user.nom" ng-pattern="/^[a-zA-Z '-]+$/i" />
                     <div ng-messages="updateProfileForm.lastname.$error" ng-show="updateProfileForm.lastname.$invalid && updateProfileForm.lastname.$touched"
                         style="color:maroon" role="alert">
                         <div ng-message="pattern">only letters required</div>
@@ -29,7 +29,7 @@
 
             <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                 <label>Adresse</label>
-                <input type="text" name="address" ng-model="profileCtrl.user.adresse" ng-pattern="/^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+/i"
+                <input type="text" name="address" ng-model="updateProfileCtrl.user.adresse" ng-pattern="/^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+/i"
                 />
                 <div ng-messages="updateProfileForm.address.$error" ng-show="updateProfileForm.address.$invalid && updateProfileForm.address.$touched"
                     style="color:maroon" role="alert">
@@ -39,7 +39,7 @@
             <div layout="row">
                 <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                     <label>Code Postal</label>
-                    <input type="text" name="cp" ng-model="profileCtrl.user.codePostal" ng-pattern="/^[0-9]+$/i" />
+                    <input type="text" name="cp" ng-model="updateProfileCtrl.user.codePostal" ng-pattern="/^[0-9]+$/i" />
                     <div ng-messages="updateProfileForm.cp.$error" ng-show="updateProfileForm.cp.$invalid && updateProfileForm.cp.$touched"
                         style="color:maroon" role="alert">
                         <div ng-message="pattern">only letters required</div>
@@ -47,7 +47,7 @@
                 </md-input-container>
                 <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                     <label>Ville</label>
-                    <input type="text" name="ville" ng-model="profileCtrl.user.ville" ng-pattern="/^[a-zA-Z '-]+$/i" />
+                    <input type="text" name="ville" ng-model="updateProfileCtrl.user.ville" ng-pattern="/^[a-zA-Z '-]+$/i" />
                     <div ng-messages="updateProfileForm.ville.$error" ng-show="updateProfileForm.ville.$invalid && updateProfileForm.ville.$touched"
                         style="color:maroon" role="alert">
                         <div ng-message="pattern">only letters required</div>
@@ -56,7 +56,7 @@
             </div>
             <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                 <label>Email</label>
-                <input type="email" name="email" ng-model="profileCtrl.user.email" required/>
+                <input type="email" name="email" ng-model="updateProfileCtrl.user.email" required/>
                 <div ng-messages="updateProfileForm.email.$error" ng-show="updateProfileForm.email.$invalid && updateProfileForm.email.$touched"
                     style="color:maroon" role="alert" required>
                     <div ng-message="required">You did not enter a field</div>
@@ -64,7 +64,7 @@
             </md-input-container>
             <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                 <label>Tel</label>
-                <input type="text" name="tel" ng-model="profileCtrl.user.tel" placeholder="xx.xx.xx.xx.xx" ng-pattern="/^0[1-9]([.]?[0-9]{2}){4}$/i" required/>
+                <input type="text" name="tel" ng-model="updateProfileCtrl.user.tel" placeholder="xx.xx.xx.xx.xx" ng-pattern="/^0[1-9]([.]?[0-9]{2}){4}$/i" required/>
                 <div ng-messages="updateProfileForm.tel.$error" ng-show="updateProfileForm.tel.$invalid && updateProfileForm.tel.$touched"
                     style="color:maroon" role="alert" required>
                     <div ng-message="required">You did not enter a field</div>
@@ -74,7 +74,7 @@
 
             <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                 <label>Véhicule</label>
-                <input type="text" name="vehicle" ng-model="profileCtrl.user.voiture" required/>
+                <input type="text" name="vehicle" ng-model="updateProfileCtrl.user.voiture" required/>
                 <div ng-messages="updateProfileForm.vehicle.$error" ng-show="updateProfileForm.vehicle.$invalid && updateProfileForm.vehicle.$touched"
                     style="color:maroon" role="alert" required>
                     <div ng-message="required">You did not enter a field</div>
@@ -82,7 +82,7 @@
             </md-input-container>
             <md-input-container class="updateForm" class="md-block" flex-gt-sm>
                 <label>Nombre de places</label>
-                <input type="number" name="places" ng-model="profileCtrl.user.places" min="1" max="9" required/>
+                <input type="number" name="places" ng-model="updateProfileCtrl.user.places" min="1" max="9" required/>
                 <div ng-messages="updateProfileForm.places.$error" ng-show="updateProfileForm.places.$invalid && updateProfileForm.places.$touched"
                     style="color:maroon" role="alert" required>
                     <div ng-message="required">You did not enter a field</div>
@@ -92,10 +92,10 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
-            <md-button class="md-raised" ng-click="profileCtrl.closeDialog()">
+            <md-button class="md-raised" ng-click="updateProfileCtrl.closeDialog()">
                 Annuler
             </md-button>
-            <md-button class="md-raised md-primary" ng-click="profileCtrl.validateUpdateProfile()" ng-disabled="!updateProfileForm.$valid">
+            <md-button class="md-raised md-primary" ng-click="updateProfileCtrl.validateUpdateProfile()" ng-disabled="!updateProfileForm.$valid">
                 Valider
             </md-button>
         </md-dialog-actions>
