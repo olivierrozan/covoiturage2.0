@@ -26,7 +26,6 @@ angular.module('main').component('profile', {
         public displayProfile() {
             this.$http.get('http://localhost:9300/profile').then((response) => {
                 this.user = response.data['user'];
-                console.log('call');
             }).then((error) => {
                 return error;
             });
@@ -35,45 +34,38 @@ angular.module('main').component('profile', {
         public showUpdateProfileDialog(ev) {
             this.$mdDialog.show({
                 templateUrl: './src/component/profile/updateProfile.html',
-                locals: {data: this.user, dialog: this.$mdDialog, http: this.$http, state: this.$state, toast: this.$mdToast},
-                controller: function UpdateProfileController(data, dialog, http, state, toast) {
-                    this.user = data;
+                locals: {vm: this},
+                controller: function UpdateProfileController(vm) {
+                    this.user = vm.user;
                     
-                    this.config = {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    };
-
                     this.validateUpdateProfile = () => {
-                        console.log("toto", this.user);
-                        http.post('http://localhost:9300/updateProfile', this.user, this.config).then((response) => {
+                        vm.$http.post('http://localhost:9300/updateProfile', this.user, vm.config).then((response) => {
                             this.status = response.data['message'];
                             let message = '';
                             if (this.status === 'success') {
                                 message = 'Profil modifié !'
-                                dialog.hide();
+                                vm.$mdDialog.hide();
                             } else {
                                 message = "Erreur: Le profil n'a pas été modifié !";
                             }
             
-                            toast.show(
-                                toast.simple()
+                            vm.$mdToast.show(
+                                vm.$mdToast.simple()
                                 .textContent(message)
                                 .position('bottom left')
                                 .hideDelay(3000)
                             );
                             
-                            dialog.hide();
+                            vm.$mdDialog.hide();
                             
                         }).then((error) => {
                             return error;
                         });
-                        state.go('profile');
+                        vm.$state.go('profile');
                     }
 
                     this.closeDialog = () => {
-                        dialog.cancel();
+                        vm.$mdDialog.cancel();
                     }
                 },
                 controllerAs: 'updateProfileCtrl',
