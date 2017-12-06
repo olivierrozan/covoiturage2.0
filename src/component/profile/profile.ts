@@ -11,10 +11,22 @@ angular.module('main').component('profile', {
 
         private user;
         private status: String;
+        private config;
 
         constructor(private $http: ng.IHttpService, private $state, private $mdDialog, private $scope: ng.IScope, private $mdToast) {
+            this.config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            this.displayProfile();
+        }
+
+        public displayProfile() {
             this.$http.get('http://localhost:9300/profile').then((response) => {
                 this.user = response.data['user'];
+                console.log('call');
             }).then((error) => {
                 return error;
             });
@@ -23,6 +35,7 @@ angular.module('main').component('profile', {
         public showUpdateProfileDialog(ev) {
             this.$mdDialog.show({
                 templateUrl: './src/component/profile/updateProfile.html',
+                bindToController:true,
                 controller: ProfileCtrl,
                 controllerAs: 'profileCtrl',
                 parent: angular.element(document.body),
@@ -51,16 +64,11 @@ angular.module('main').component('profile', {
         };
 
         public validatePasswordChange() {
-            let config = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            };
             
             this.$http.post('http://localhost:9300/changePassword', {
                 currentPassword: this.user.currentPassword,
                 newPassword: this.user.newPassword
-            }, config).then((response) => {
+            }, this.config).then((response) => {
                 this.status = response.data['message'];
                 let message = '';
                 if (this.status === 'success') {
@@ -80,8 +88,33 @@ angular.module('main').component('profile', {
             }).then((error) => {
                 return error;
             });
+        }
+
+        public validateUpdateProfile() {
             
-            
+            this.$http.post('http://localhost:9300/updateProfile', this.user, this.config).then((response) => {
+                this.status = response.data['message'];
+                let message = '';
+                if (this.status === 'success') {
+                    message = 'Profil modifié !'
+                    this.$mdDialog.hide();
+                } else {
+                    message = "Erreur: Le profil n'a pas été modifié !";
+                }
+
+                this.$mdToast.show(
+                    this.$mdToast.simple()
+                    .textContent(message)
+                    .position('bottom left')
+                    .hideDelay(3000)
+                );
+                
+                this.$mdDialog.hide();
+                
+            }).then((error) => {
+                return error;
+            });
+            this.$state.go('profile');
         }
 
         public closeDialog() {

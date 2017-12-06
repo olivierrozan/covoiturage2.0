@@ -112,7 +112,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.get("/profile"/*, isLoggedIn*/, (req, res) => {
-        User.find({ where: { email: 'rozan.olivier@gmail.com' } }).then((user) => {
+        User.find({ where: { email: 'rozan.oler@gmail.com' } }).then((user) => {
             console.log("profil user: ");
             return res.json({ user: user.get() });
         });
@@ -140,15 +140,42 @@ export let allRoutes = (app, passport, urlencodedParser) => {
                     console.log('password change ok', userPassword);
                 });
                 console.log('password change ok', userPassword);
-                return res.json({message: 'success'});
+                return res.json({ message: 'success' });
             } else {
                 console.log('Error password change: Invalid current password');
-                return res.json({message: 'error'});
+                return res.json({ message: 'error' });
             }
-            
+
         }).catch((err) => {
             console.log("Error:", err);
         });
+    });
+
+    app.post('/updateProfile', (req, res, next) => {
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+        try {
+            req.body = JSON.parse(Object.keys(req.body)[0]);
+        } catch (err) {
+            req.body = req.body;
+        }
+        console.log("body parsing", req.body);
+
+        let user = req.body;
+
+        delete user.id;
+        delete user.password;
+
+        // update sequelize
+        User.update(
+            user, { where: { email: 'rozan.oler@gmail.com' } }
+        ).then(() => {
+            console.log('update profile ok');
+        });
+        console.log('Update profile ok');
+        return res.json({ message: 'success' });
     });
 }
 
