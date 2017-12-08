@@ -20,6 +20,10 @@ angular.module('main').component('register', {
             };
         }
 
+        public isActive (a, b) {
+            return a + b === 5;
+        };
+
         public register() {
             let config = {
                 headers: {

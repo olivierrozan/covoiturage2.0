@@ -1,4 +1,4 @@
-describe('menu', function() {
+xdescribe('menu', function() {
 
   beforeEach(angular.mock.module('main'));
 
@@ -9,7 +9,7 @@ describe('menu', function() {
     compile = $compile;
   }));
 
-  it('should ...', function() {
+  xit('should ...', function() {
 
     /* 
     To test your directive, you need to create some html that would use your directive,

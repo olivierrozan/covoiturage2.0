@@ -9,11 +9,11 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         stats: 'errors-only'
-    }/*,
+    },/*
     eslint: {
         failOnWarning: false,
         failOnError: true
-    }*/,
+    },*/
     plugins: [
         new CopyWebpackPlugin([
             {

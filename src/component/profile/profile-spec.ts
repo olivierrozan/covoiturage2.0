@@ -1,4 +1,4 @@
-describe('profile', function() {
+xdescribe('profile', function() {
 
   beforeEach(angular.mock.module('main'));
 
@@ -8,7 +8,7 @@ describe('profile', function() {
     $componentController = _$componentController_;
   }));
 
-  it('should ...', function() {
+  xit('should ...', function() {
 
     /* 
     var bindings = {};

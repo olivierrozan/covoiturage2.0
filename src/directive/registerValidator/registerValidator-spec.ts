@@ -1,4 +1,4 @@
-describe('signupValidator', function() {
+xdescribe('signupValidator', function() {
 
   beforeEach(angular.mock.module('main'));
 
@@ -9,7 +9,7 @@ describe('signupValidator', function() {
     compile = $compile;
   }));
 
-  it('should ...', function() {
+ xit('should ...', function() {
 
     /* 
     To test your directive, you need to create some html that would use your directive,
