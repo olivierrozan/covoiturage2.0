@@ -1,20 +1,45 @@
-describe('register', () => {
+xdescribe('register', () => {
 
     beforeEach(angular.mock.module('main'));
 
     var $componentController: ng.IComponentControllerService;
     var ctrl;
+    var httpBackend;
+    var scope;
 
-    beforeEach(inject((_$componentController_: ng.IComponentControllerService, $controller) => {
+    beforeEach(inject((_$componentController_: ng.IComponentControllerService, $controller, $httpBackend, $rootScope) => {
+        httpBackend = $httpBackend;
+        scope = $rootScope.$new();
         $componentController = _$componentController_;
 
         ctrl = $componentController('register', null, null);
     }));
 
-    it('should check ctrl call', () => {
+    afterEach(function () {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });
 
-        var c = ctrl;
-        expect(c.isActive(2, 7)).toBeTruthy();
+    xit('should check ctrl call', () => {
+
+        // var c = ctrl;
+        // expect(c.isActive(2, 7)).toBeTruthy();
+        var user = {email: 'rozan.oler@gmail.com'};
+        httpBackend.expect('POST', 'http://localhost:9300/register', (data) => {
+            let json = JSON.parse(data);
+            expect(json.email).toBe(user.email);
+        }).respond(200, true);
+
+        // have to use $apply to trigger the $digest which will
+        // take care of the HTTP request
+        scope.$apply( () => {
+            var c = ctrl;
+            c.user = {email: 'rozan.oler@gmail.com'};
+            c.register();
+        });
+
+        httpBackend.flush();
+
     });
 
     xit('should match password regex', () => {

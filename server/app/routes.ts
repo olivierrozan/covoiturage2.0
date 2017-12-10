@@ -11,9 +11,10 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     };
 
     app.post('/register', (req, res, next) => {
-        // res.header('Access-Control-Allow-Credentials', true);
-        // res.header("Access-Control-Allow-Origin", "*");
-        // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
@@ -104,6 +105,10 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.get('/logout', (req, res) => {
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        
         req.session.destroy((err) => {
             console.log("BYE");
             //res.clearCookie('connect.sid');
@@ -112,6 +117,10 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.get("/profile"/*, isLoggedIn*/, (req, res) => {
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        
         User.find({ where: { email: 'rozan.oler@gmail.com' } }).then((user) => {
             console.log("profil user: ");
             return res.json({ user: user.get() });

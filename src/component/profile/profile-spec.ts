@@ -1,21 +1,45 @@
-xdescribe('profile', function() {
+describe('profile', () => {
 
-  beforeEach(angular.mock.module('main'));
+    beforeEach(angular.mock.module('main'));
 
-  var $componentController:ng.IComponentControllerService;
+    var $componentController: ng.IComponentControllerService;
+    var ctrl;
+    var httpBackend;
+    var scope;
 
-  beforeEach(inject(function(_$componentController_:ng.IComponentControllerService) {
-    $componentController = _$componentController_;
-  }));
+    beforeEach(inject((_$componentController_: ng.IComponentControllerService, $controller, $httpBackend, $rootScope) => {
+        httpBackend = $httpBackend;
+        $componentController = _$componentController_;
+        scope = $rootScope.$new();
 
-  xit('should ...', function() {
+        ctrl = $componentController('profile', null, null);
+    }));
 
-    /* 
-    var bindings = {};
-    var injectionOverrides = {};
-    var ctrl = $componentController('profile', injectionOverrides, bindings);
-    ... now test ctrl ...
-    */
+    afterEach(() => {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });
 
-  });
+    it('should ...', () => {
+
+        let user = {
+            email: 'rozan.oler@gmail.com'
+        };
+
+        httpBackend.expect('GET', 'http://localhost:9300/profile')
+            .respond({
+                'email': 'rozan.oler@gmail.com'
+            });
+
+        // have to use $apply to trigger the $digest which will
+        // take care of the HTTP request
+        scope.$apply( () => {
+            ctrl.displayProfile();
+        });
+
+        httpBackend.flush();
+
+        expect(user.email).toBe('rozan.oler@gmail.com');
+
+    });
 });

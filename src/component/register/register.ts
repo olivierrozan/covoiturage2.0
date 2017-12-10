@@ -20,7 +20,7 @@ angular.module('main').component('register', {
             };
         }
 
-        public isActive (a, b) {
+        public isFive (a, b) {
             return a + b === 5;
         };
 
