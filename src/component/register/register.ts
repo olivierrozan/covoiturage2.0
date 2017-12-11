@@ -1,6 +1,7 @@
 'use strict';
 
 import * as angular from 'angular';
+import { RegisterService } from '../../service/registerService/registerService';
 
 angular.module('main').component('register', {
     template: require('./register.html'),
@@ -11,16 +12,16 @@ angular.module('main').component('register', {
 
         private user;
         private registerForm;
-        private status;
+        private response;
 
-        constructor(private $http: ng.IHttpService, private $state, private $mdToast) {
+        constructor(private $mdToast, private RegisterService: RegisterService) {
             this.user = {
-                email: 'rozan.oler@gmail.com',
-                password: 'efficient'
+                email: 'rozan@gmail.com',
+                password: 'userPWD59'
             };
         }
 
-        public isFive (a, b) {
+        public isFive(a, b) {
             return a + b === 5;
         };
 
@@ -31,10 +32,10 @@ angular.module('main').component('register', {
                 }
             };
 
-            this.$http.post('http://localhost:9300/register', this.user, config).then((response) => {
-                this.status = response.data['message'];
+            this.RegisterService.sendRegisterData(this.user, config).then((response) => {
+                console.log("response: ", response);
 
-                if (this.status === 'Created') {
+                if (response.data['message'] === 'Created') {
                     this.$mdToast.show(
                         this.$mdToast.simple()
                             .textContent("Utilisateur créé ! Un mail vous est envoyé à l'adresse mail indiquée !")
@@ -49,8 +50,6 @@ angular.module('main').component('register', {
                             .hideDelay(3000)
                     );
                 }
-            }).then((error) => {
-                return error;
             });
         }
     },

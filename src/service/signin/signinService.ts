@@ -5,4 +5,4 @@ export class SigninService {
     
 }
 
-angular.module('main').service('signinService',SigninService);
+angular.module('main').service('SigninService',SigninService);

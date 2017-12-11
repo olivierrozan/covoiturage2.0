@@ -24,7 +24,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         console.log("body parsing", req.body);
 
         passport.authenticate('local-register', (err, user) => {
-            console.log('*-register-*', user);
+            console.log('*-register-*', user.dataValues);
             if (err) {
                 return next(err);
             }
@@ -63,10 +63,11 @@ export let allRoutes = (app, passport, urlencodedParser) => {
                             console.log('error sending mail');
                             console.log(error.message);
                             //return process.exit(1);
+                        } else {
+                            console.log('Message sent: %s', info.messageId);
+                            // Preview only available when sending through an Ethereal account
+                            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
                         }
-                        console.log('Message sent: %s', info.messageId);
-                        // Preview only available when sending through an Ethereal account
-                        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
                         // only needed when using pooled connections
                         transporter.close();

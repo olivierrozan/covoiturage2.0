@@ -11,3 +11,4 @@ import './src/component/profile/profile';
 import './src/directive/registerValidator/registerValidator';
 import './src/component/profile/myoffers/myoffers';
 import './src/component/profile/myoffers/myoffers.scss';
+import './src/service/registerService/registerService';
