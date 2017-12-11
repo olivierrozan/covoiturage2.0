@@ -9,3 +9,5 @@ import './src/component/register/register.scss';
 import './src/directive/menu/menu';
 import './src/component/profile/profile';
 import './src/directive/registerValidator/registerValidator';
+import './src/component/profile/myoffers/myoffers';
+import './src/component/profile/myoffers/myoffers.scss';

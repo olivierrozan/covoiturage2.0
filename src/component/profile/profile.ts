@@ -19,8 +19,9 @@ angular.module('main').component('profile', {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-
+            console.log("Profil");
             this.displayProfile();
+            $state.go('profile.myoffers');
         }
 
         public displayProfile() {

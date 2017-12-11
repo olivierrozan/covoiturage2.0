@@ -12,14 +12,19 @@ angular.module('main', [
 angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) {
     $qProvider.errorOnUnhandledRejections(false);
     $mdIconProvider.defaultIconSet('assets/mdi.svg');
+
     $stateProvider.state('register', {
         url: '/register',
         template: '<register></register>'
     });
-
     $stateProvider.state('profile', {
         url: '/profile',
-        template: '<profile></profile>'
+        template: '<profile></profile>',
+        redirectTo: 'profile.myoffers'
+    });
+    $stateProvider.state('profile.myoffers', {
+        url: '/myoffers',
+        template: '<myoffers></myoffers>'
     });
 
     /* Add New Routes Above */
