@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { SigninService } from '../../service/signin/signinService';
+import { SigninService } from '../../service/signinService/signinService';
 
 angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
     return {

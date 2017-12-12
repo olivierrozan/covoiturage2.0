@@ -1,4 +1,6 @@
+'use strict';
 import * as angular from 'angular';
+import { ProfileService } from '../../service/profileService/profileService';
 
 angular.module('app', ['ngCookies']);
 
@@ -13,57 +15,48 @@ angular.module('main').component('profile', {
         private status: String;
         private config;
 
-        constructor(private $http: ng.IHttpService, private $state, private $mdDialog, private $scope: ng.IScope, private $mdToast) {
+        constructor(private $http: ng.IHttpService, private $state, private $mdDialog, private $scope: ng.IScope, private $mdToast, private ProfileService: ProfileService) {
             this.config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-            console.log("Profil");
-            this.displayProfile();
-            $state.go('profile.myoffers');
-        }
-
-        public displayProfile() {
-            this.$http.get('http://localhost:9300/profile').then((response) => {
-                this.user = response.data['user'];
-            }).then((error) => {
-                return error;
+            this.ProfileService.getUserProfile().then((response) => {
+                this.user = response;
             });
+
+            $state.go('profile.myoffers');
         }
 
         public showUpdateProfileDialog(ev) {
             this.$mdDialog.show({
                 templateUrl: './src/component/profile/updateProfile.html',
-                locals: {vm: this},
+                locals: { vm: this },
                 controller: function UpdateProfileController(vm) {
                     this.user = vm.user;
-                    
+
                     this.validateUpdateProfile = () => {
-                        vm.$http.post('http://localhost:9300/updateProfile', this.user, vm.config).then((response) => {
-                            this.status = response.data['message'];
+                        vm.ProfileService.updateUserProfile(this.user, vm.config).then((response) => {
                             let message = '';
-                            if (this.status === 'success') {
+
+                            if (response === 'success') {
                                 message = 'Profil modifié !'
                                 vm.$mdDialog.hide();
                             } else {
                                 message = "Erreur: Le profil n'a pas été modifié !";
                             }
-            
+
                             vm.$mdToast.show(
                                 vm.$mdToast.simple()
-                                .textContent(message)
-                                .position('bottom left')
-                                .hideDelay(3000)
+                                    .textContent(message)
+                                    .position('bottom left')
+                                    .hideDelay(3000)
                             );
-                            
-                            vm.$mdDialog.hide();
-                            
-                        }).then((error) => {
-                            return error;
+
+                            vm.$state.go('profile');
                         });
-                        vm.$state.go('profile');
-                    }
+                    };
+
 
                     this.closeDialog = () => {
                         vm.$mdDialog.cancel();
@@ -111,11 +104,11 @@ angular.module('main').component('profile', {
 
                 this.$mdToast.show(
                     this.$mdToast.simple()
-                    .textContent(message)
-                    .position('bottom left')
-                    .hideDelay(3000)
+                        .textContent(message)
+                        .position('bottom left')
+                        .hideDelay(3000)
                 );
-                
+
             }).then((error) => {
                 return error;
             });
