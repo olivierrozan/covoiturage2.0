@@ -122,7 +122,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         
-        User.find({ where: { email: 'rozan.oler@gmail.com' } }).then((user) => {
+        User.find({ where: { email: 'AAA@gmail.com' } }).then((user) => {
             console.log("profil user: ");
             return res.json({ user: user.get() });
         });
@@ -138,21 +138,21 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         } catch (err) {
             req.body = req.body;
         }
-        console.log("body parsing", req.body);
+        console.log("**body parsing** ", req.body);
         let userPassword = generateHash(req.body.newPassword);
 
-        User.findOne({ where: { email: 'rozan.oler@gmail.com' } }).then((user, err) => {
+        User.findOne({ where: { email: 'AAA@gmail.com' } }).then((user, err) => {
             if (bcrypt.compareSync(req.body.currentPassword, user.get().password)) {
                 // update sequelize
                 User.update(
-                    { password: userPassword }, { where: { email: 'rozan.oler@gmail.com' } }
+                    { password: userPassword }, { where: { email: 'AAA@gmail.com' } }
                 ).then(() => {
                     console.log('password change ok', userPassword);
                 });
                 console.log('password change ok', userPassword);
                 return res.json({ message: 'success' });
             } else {
-                console.log('Error password change: Invalid current password');
+                console.log('Error password change: Invalid current password: ');
                 return res.json({ message: 'error' });
             }
 
@@ -180,7 +180,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 
         // update sequelize
         User.update(
-            user, { where: { email: 'rozan.oler@gmail.com' } }
+            user, { where: { email: 'AAA@gmail.com' } }
         ).then(() => {
             console.log('update profile ok');
         });

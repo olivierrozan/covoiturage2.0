@@ -25,6 +25,17 @@ export class ProfileService {
             return error;
         });
     }
+
+    public updatePassword(user, config) {
+        return this.$http.post('http://localhost:9300/changePassword', {
+            currentPassword: user.currentPassword,
+            newPassword: user.newPassword
+        }, config).then((response) => {
+            return response.data['message'];
+        }).then((error) => {
+            return error;
+        });
+    }
 }
 
 angular.module('main').service('ProfileService',ProfileService);

@@ -57,7 +57,6 @@ angular.module('main').component('profile', {
                         });
                     };
 
-
                     this.closeDialog = () => {
                         vm.$mdDialog.cancel();
                     }
@@ -76,8 +75,37 @@ angular.module('main').component('profile', {
         public showPasswordDialog(ev) {
             this.$mdDialog.show({
                 templateUrl: './src/component/profile/updatePassword.html',
-                controller: ProfileCtrl,
-                controllerAs: 'profileCtrl',
+                locals: { vm: this },
+                controller: function UpdatePasswordCtrl(vm) {
+                    this.user = vm.user;
+
+                    this.validatePasswordChange = () => {
+                        vm.ProfileService.updatePassword(this.user, vm.config).then((response) => {
+                            let message = '';
+                            console.log('update ', response);
+                            if (response === 'success') {
+                                message = 'Mot de passe modifié !'
+                                vm.$mdDialog.hide();
+                            } else {
+                                message = "Erreur: Mot de passe incorrect !";
+                            }
+
+                            vm.$mdToast.show(
+                                vm.$mdToast.simple()
+                                    .textContent(message)
+                                    .position('bottom left')
+                                    .hideDelay(3000)
+                            );
+
+                            vm.$state.go('profile');
+                        });
+                    }
+
+                    this.closeDialog = () => {
+                        vm.$mdDialog.cancel();
+                    }
+                },
+                controllerAs: 'updatePasswordCtrl',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
@@ -87,36 +115,6 @@ angular.module('main').component('profile', {
                 console.log('Changement de mot de passe annulé.');
             });
         };
-
-        public validatePasswordChange() {
-            this.$http.post('http://localhost:9300/changePassword', {
-                currentPassword: this.user.currentPassword,
-                newPassword: this.user.newPassword
-            }, this.config).then((response) => {
-                this.status = response.data['message'];
-                let message = '';
-                if (this.status === 'success') {
-                    message = 'Mot de passe modifié !'
-                    this.$mdDialog.hide();
-                } else {
-                    message = "Erreur: Mot de passe incorrect !";
-                }
-
-                this.$mdToast.show(
-                    this.$mdToast.simple()
-                        .textContent(message)
-                        .position('bottom left')
-                        .hideDelay(3000)
-                );
-
-            }).then((error) => {
-                return error;
-            });
-        }
-
-        public closeDialog() {
-            this.$mdDialog.cancel();
-        }
 
         public logout() {
             this.$http.get('http://localhost:9300/logout').then((response) => {
