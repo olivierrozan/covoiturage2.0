@@ -20,8 +20,8 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
 
     function Menu($http, $state) {
         this.user = {
-            email: 'rozan.oler@gmail.com',
-            password: 'efficient'
+            email: 'AAA@gmail.com',
+            password: 'olivier59121'
         };
 
         this.result;
@@ -37,11 +37,13 @@ angular.module('main').directive('menu', [($http: ng.IHttpService, $state) => {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             };
-    
+
             $http.post('http://localhost:9300/connexion', this.user, config).then((response) => {
-                if (response) {
-                    $state.go('profile');
-                }
+                console.log("signin: ", response);
+
+                // if (response) {
+                //     $state.go('profile');
+                // }
             }).then((error) => {
                 return error;
             });

@@ -11,7 +11,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     };
 
     app.post('/register', (req, res, next) => {
-        
+
         res.header('Access-Control-Allow-Credentials', true);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -99,7 +99,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 
                 req.logIn(user, function (err) {
                     if (err) { return next(err); }
-                    return res.send({ success: true, message: 'Login efetivado com sucesso', user: user });
+                    return res.json({ message: 'success', user: user });
                 });
             }
         })(req, res, next);
@@ -109,7 +109,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         res.header('Access-Control-Allow-Credentials', true);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        
+
         req.session.destroy((err) => {
             console.log("BYE");
             //res.clearCookie('connect.sid');
@@ -121,9 +121,8 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         res.header('Access-Control-Allow-Credentials', true);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        
+        console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
         User.find({ where: { email: 'AAA@gmail.com' } }).then((user) => {
-            console.log("profil user: ");
             return res.json({ user: user.get() });
         });
     });
@@ -190,6 +189,10 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 }
 
 function isLoggedIn(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     console.log("auth? ", req.isAuthenticated(), req.session);
 
     if (req.isAuthenticated()) {

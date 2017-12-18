@@ -24,7 +24,7 @@ xdescribe('register', () => {
 
         // var c = ctrl;
         // expect(c.isActive(2, 7)).toBeTruthy();
-        var user = {email: 'rozan.oler@gmail.com'};
+        var user = {email: 'AAA@gmail.com'};
         httpBackend.expect('POST', 'http://localhost:9300/register', (data) => {
             let json = JSON.parse(data);
             expect(json.email).toBe(user.email);
@@ -34,7 +34,7 @@ xdescribe('register', () => {
         // take care of the HTTP request
         scope.$apply( () => {
             var c = ctrl;
-            c.user = {email: 'rozan.oler@gmail.com'};
+            c.user = {email: 'AAA@gmail.com'};
             c.register();
         });
 

@@ -9,6 +9,8 @@ export class RegisterService {
     }
 
     public sendRegisterData(user, config) {
+        user.firstname = user.firstname[0].toUpperCase() + user.firstname.slice(1);
+        user.lastname = user.lastname.toUpperCase();
         return this.$http.post('http://localhost:9300/register', user, config).then((response) => {
             this.data = response;
             // console.log("server: ", this.data);

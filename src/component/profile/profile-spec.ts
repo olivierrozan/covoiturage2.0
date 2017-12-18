@@ -23,12 +23,12 @@ describe('profile', () => {
     it('should ...', () => {
 
         let user = {
-            email: 'rozan.oler@gmail.com'
+            email: 'AAA@gmail.com'
         };
 
         httpBackend.expect('GET', 'http://localhost:9300/profile')
             .respond({
-                'email': 'rozan.oler@gmail.com'
+                'email': 'AAA@gmail.com'
             });
 
         // have to use $apply to trigger the $digest which will
@@ -39,7 +39,7 @@ describe('profile', () => {
 
         httpBackend.flush();
 
-        expect(user.email).toBe('rozan.oler@gmail.com');
+        expect(user.email).toBe('AAA@gmail.com');
 
     });
 });

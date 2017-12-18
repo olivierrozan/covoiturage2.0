@@ -17,11 +17,11 @@ export let pass = (passport) => {
         done(null, user.id);
     });
 
-    passport.deserializeUser((id, done) => {
-        console.log('**DESER**', id);
-        User.findById(id).then((user) => {
-            done(null, user.get());
-        });
+    passport.deserializeUser((user, done) => {
+        console.log('**DESER**', user.id);
+        // User.findById(user.id).then((user) => {
+            done(false, user);
+        // });
     });
 
     passport.use('local-register', new LocalStrategy({
