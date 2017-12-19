@@ -8,7 +8,6 @@ export class MyoffersService {
 
     public getMyOffers() {
         return this.$http.get('http://localhost:9300/profile/myoffers').then((response) => {
-            console.log('All Offers serv: ', response);
             return response.data['offers'];
         }).then((error) => {
             return error;

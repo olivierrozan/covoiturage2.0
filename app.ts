@@ -1,4 +1,5 @@
 import * as angular from 'angular';
+import * as moment from './node_modules/moment/moment.js';
 
 angular.module('main', [
     require('angular-ui-router'),
@@ -9,7 +10,16 @@ angular.module('main', [
     require('angular-cookies')
 ]);
 
-angular.module('main').config(function ($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) {
+angular.module('main').config( ($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) => {
+    
+    moment.locale('fr');
+
+    moment.updateLocale('fr', {
+        months : ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+                  "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        weekdays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+    });
+
     $qProvider.errorOnUnhandledRejections(false);
     $mdIconProvider.defaultIconSet('assets/mdi.svg');
 
