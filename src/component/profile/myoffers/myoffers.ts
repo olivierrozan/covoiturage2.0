@@ -9,10 +9,11 @@ angular.module('main').component('myoffers', {
     },
     controller: class MyOffersCtrl {
         
-        private nb: Number;
+        private offers;
+        
         constructor(private $state) {
             console.log("Mes offres");
-            this.nb = 666;
+            
         }
     },
     controllerAs: 'myOffersCtrl'

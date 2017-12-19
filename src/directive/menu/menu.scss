@@ -1,22 +1,22 @@
 #title {
     margin: 0px;
     padding: 10px;
+    margin-left: 42px;
 }
 
 #menu {
-    background-color: #2196F3;
+    background-color: #1976D2;
     color: #ffffff;
     height: 60px;
 }
 
 md-menu-bar button, md-menu button {
     font-size: 20px !important;
-    margin: 0px 10px !important;
     height: 60px !important;
     color: white;
-    transition: color 0.2s;
+    transition: background-color 0.2s;
 }
 
 md-menu-bar button:hover, md-menu button:hover {
-    color: #1565C0;
+    background-color: #448AFF;
 }
