@@ -10,16 +10,16 @@
                 <md-list-item class="md-3-line" ng-repeat="offer in myOffersCtrl.offers" ng-click="null">
                     <div class="md-list-item-text" layout="column">
                         <div class="oneOffer" layout="row">
-                            <h3>Départ: </h3>
-                            <span>{{ offer.adresseDepart }} {{ offer.codePostalDepart }} {{ offer.villeDepart }}</span>
+                            <h3 style="color: #388E3C;">Départ: </h3>
+                            <h3 style="color: #388E3C;">{{ offer.adresseDepart }} {{ offer.codePostalDepart }} {{ offer.villeDepart }}</h3>
                         </div>
                         <div class="oneOffer" layout="row">
-                            <h3>Arrivée: </h3>
-                            <span>{{ offer.adresseArrivee }} {{ offer.codePostalArrivee }} {{ offer.villeArrivee}}</span>
+                            <h3 style="color: #D32F2F;">Arrivée: </h3>
+                            <h3 style="color: #D32F2F;">{{ offer.adresseArrivee }} {{ offer.codePostalArrivee }} {{ offer.villeArrivee}}</h3>
                         </div>
                         <div class="oneOffer" layout="row">
                             <h4>Publié le: </h4>
-                            <span>{{ offer.date_publication }}</span>
+                            <h4>{{ offer.date_publication }}</h4>
                         </div>
                     </div>
                     <md-divider></md-divider>
