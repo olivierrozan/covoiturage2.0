@@ -7,25 +7,24 @@
 
         <md-content>
             <md-list flex>
-                <md-list-item class="md-3-line" ng-click="null">
+                <md-list-item class="md-3-line" ng-repeat="offer in myOffersCtrl.offers" ng-click="null">
                     <div class="md-list-item-text" layout="column">
-                        <h3 class="md-headline">Départ: </h3>
-                        <h3>Arrivée: </h3>
-                        <br />
-                        <h4>Publié le: </h4>
+                        <div class="oneOffer" layout="row">
+                            <h3>Départ: </h3>
+                            <span>{{ offer.adresseDepart }} {{ offer.codePostalDepart }} {{ offer.villeDepart }}</span>
+                        </div>
+                        <div class="oneOffer" layout="row">
+                            <h3>Arrivée: </h3>
+                            <span>{{ offer.adresseArrivee }} {{ offer.codePostalArrivee }} {{ offer.villeArrivee}}</span>
+                        </div>
+                        <div class="oneOffer" layout="row">
+                            <h4>Publié le: </h4>
+                            <span>{{ offer.date_publication }}</span>
+                        </div>
                     </div>
+                    <md-divider></md-divider>
                 </md-list-item>
 
-                <md-divider></md-divider>
-
-                <md-list-item class="md-3-line" ng-click="null">
-                    <div class="md-list-item-text" layout="column">
-                        <h3>Départ: </h3>
-                        <h3>Arrivée: </h3>
-                        <br />
-                        <h4>Publié le: </h4>
-                    </div>
-                </md-list-item>
             </md-list>
         </md-content>
     </md-toolbar>

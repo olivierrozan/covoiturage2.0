@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt-nodejs');
 const seq = require('../config/database').initDatabase(Sequelize);
 const User = require('../models/Users').initUserModel(seq, Sequelize);
 
+const myOffers = require('./myOffers.ts');
+
 export let allRoutes = (app, passport, urlencodedParser) => {
 
     let generateHash = (password) => {
@@ -121,7 +123,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         res.header('Access-Control-Allow-Credentials', true);
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
+        // console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
         User.find({ where: { email: 'AAA@gmail.com' } }).then((user) => {
             return res.json({ user: user.get() });
         });
@@ -186,6 +188,8 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         console.log('Update profile ok');
         return res.json({ message: 'success' });
     });
+
+    myOffers.getMyOffers(app);
 }
 
 function isLoggedIn(req, res, next) {
