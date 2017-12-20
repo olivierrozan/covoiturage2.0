@@ -1,5 +1,4 @@
 const LocalStrategy = require('passport-local').Strategy;
-
 const bcrypt = require('bcrypt-nodejs');
 
 export let pass = (passport, seq, Sequelize) => {

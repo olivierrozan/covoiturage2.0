@@ -1,5 +1,6 @@
 const headers = require('../config/header');
 const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt-nodejs');
 
 export let postRegister = (app, seq, Sequelize, passport) => {
 
