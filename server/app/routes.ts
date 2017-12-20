@@ -1,13 +1,11 @@
 const nodemailer = require('nodemailer');
-const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt-nodejs');
-const seq = require('../config/database').initDatabase(Sequelize);
-const User = require('../models/Users').initUserModel(seq, Sequelize);
 const headers = require('../config/header');
 const myOffers = require('./myOffers.ts');
 
-export let allRoutes = (app, passport, urlencodedParser) => {
-
+export let allRoutes = (app, passport, urlencodedParser, seq, Sequelize) => {
+    
+    const User = require('../models/Users').initUserModel(seq, Sequelize);
     let generateHash = (password) => {
         return bcrypt.hashSync(password);
     };
@@ -181,7 +179,7 @@ export let allRoutes = (app, passport, urlencodedParser) => {
         return res.json({ message: 'success' });
     });
 
-    myOffers.getMyOffers(app);
+    myOffers.getMyOffers(app, seq, Sequelize);
 }
 
 function isLoggedIn(req, res, next) {

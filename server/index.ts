@@ -4,6 +4,9 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const bodyParser = require("body-parser");
 
+const Sequelize = require('sequelize');
+const seq = require('./config/database').initDatabase(Sequelize);
+
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 app.use(urlencodedParser);
 app.use(bodyParser.json());
@@ -20,12 +23,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const flash = require('connect-flash');
-require('./config/passport.ts').pass(passport);
+require('./config/passport.ts').pass(passport, seq, Sequelize);
 
 app.use(flash());
 
 const route = require('./app/routes.ts');
-route.allRoutes(app, passport, urlencodedParser);
+route.allRoutes(app, passport, urlencodedParser, seq, Sequelize);
 
 app.use((req, res, next) => {
     

@@ -1,9 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
-const Sequelize = require('sequelize');
+
 const bcrypt = require('bcrypt-nodejs');
 
-export let pass = (passport) => {
-    const seq = require('./database').initDatabase(Sequelize);
+export let pass = (passport, seq, Sequelize) => {
+    
     const User = require('../models/Users').initUserModel(seq, Sequelize);
     
     User.sync({ force: false }).then(() => {
