@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt-nodejs');
 const seq = require('../config/database').initDatabase(Sequelize);
 const User = require('../models/Users').initUserModel(seq, Sequelize);
-
+const headers = require('../config/header');
 const myOffers = require('./myOffers.ts');
 
 export let allRoutes = (app, passport, urlencodedParser) => {
@@ -14,10 +14,8 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 
     app.post('/register', (req, res, next) => {
 
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+        headers.setHeaders(res);
+        
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
         } catch (err) {
@@ -84,10 +82,8 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.post('/connexion', (req, res, next) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+        headers.setHeaders(res);
+        
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
         } catch (err) {
@@ -108,10 +104,8 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.get('/logout', (req, res) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+        headers.setHeaders(res);
+        
         req.session.destroy((err) => {
             console.log("BYE");
             //res.clearCookie('connect.sid');
@@ -120,9 +114,9 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.get("/profile"/*, isLoggedIn*/, (req, res) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        
+        headers.setHeaders(res);
+        
         // console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
         User.find({ where: { email: 'AAA@gmail.com' } }).then((user) => {
             return res.json({ user: user.get() });
@@ -130,10 +124,9 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.post('/changePassword', (req, res, next) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+        
+        headers.setHeaders(res);
+        
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
         } catch (err) {
@@ -163,10 +156,9 @@ export let allRoutes = (app, passport, urlencodedParser) => {
     });
 
     app.post('/updateProfile', (req, res, next) => {
-        res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+        
+        headers.setHeaders(res);
+        
         try {
             req.body = JSON.parse(Object.keys(req.body)[0]);
         } catch (err) {
@@ -193,10 +185,9 @@ export let allRoutes = (app, passport, urlencodedParser) => {
 }
 
 function isLoggedIn(req, res, next) {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+    
+    headers.setHeaders(res);
+    
     console.log("auth? ", req.isAuthenticated(), req.session);
 
     if (req.isAuthenticated()) {

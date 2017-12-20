@@ -53,7 +53,7 @@ angular.module('main').component('profile', {
                                     .hideDelay(3000)
                             );
 
-                            vm.$state.go('profile');
+                            vm.$state.go('profile.myoffers');
                         });
                     };
 
