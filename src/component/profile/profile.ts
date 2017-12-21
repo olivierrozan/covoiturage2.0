@@ -34,6 +34,7 @@ angular.module('main').component('profile', {
                 locals: { vm: this },
                 controller: function UpdateProfileController(vm) {
                     this.user = vm.user;
+                    vm.$scope.user = angular.copy(this.user);
 
                     this.validateUpdateProfile = () => {
                         vm.ProfileService.updateUserProfile(this.user, vm.config).then((response) => {
@@ -68,6 +69,7 @@ angular.module('main').component('profile', {
             }).then((answer) => {
                 console.log('User modifié !');
             }, (err) => {
+                this.user = angular.copy(this.$scope.user);
                 console.log('Modifications annulées.');
             });
         };
