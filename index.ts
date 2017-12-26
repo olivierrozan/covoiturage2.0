@@ -14,3 +14,5 @@ import './src/component/profile/myoffers/myoffers.scss';
 import './src/service/registerService/registerService';
 import './src/service/profileService/profileService';
 import './src/service/myoffersService/myoffersService';
+import './src/component/profile/myoffersdetails/myoffersdetails';
+import './src/service/myoffersDetailsService/myoffersDetailsService';

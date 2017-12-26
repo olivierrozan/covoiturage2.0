@@ -18,13 +18,16 @@ angular.module('main').component('myoffers', {
             
             this.MyoffersService.getMyOffers().then( response => {
                 this.offers = response;
-
                 this.offers.map((el) => {
                     el.date_publication = moment(el.date_publication).format("dddd DD MMMM YYYY") + " à " + 
                     moment(el.date_publication).format("hh") + "H" + 
                     moment(el.date_publication).format("mm")
                 });
             });
+        }
+
+        public goToDetails(offer) {
+            this.$state.go('profile.myoffersdetails', {id: offer.id});
         }
     },
     controllerAs: 'myOffersCtrl'

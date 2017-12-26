@@ -7,7 +7,7 @@
 
         <md-content>
             <md-list flex>
-                <md-list-item class="md-3-line" ng-repeat="offer in myOffersCtrl.offers" ng-click="null">
+                <md-list-item class="md-3-line" ng-repeat="offer in myOffersCtrl.offers" ng-click="myOffersCtrl.goToDetails(offer)">
                     <div class="md-list-item-text" layout="column">
                         <div class="oneOffer" layout="row">
                             <h3 style="color: #388E3C;">Départ: </h3>

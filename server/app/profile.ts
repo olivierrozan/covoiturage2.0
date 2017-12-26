@@ -1,5 +1,6 @@
 const headers = require('../config/header');
 const myOffers = require('./myOffers.ts');
+const myOffersDetails = require('./myOffersDetails.ts');
 const bcrypt = require('bcrypt-nodejs');
 
 let generateHash = (password) => {
@@ -77,4 +78,5 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
     });
 
     myOffers.getMyOffers(app, seq, Sequelize);
+    myOffersDetails.getMyOffersDetails(app, seq, Sequelize);
 }

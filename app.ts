@@ -10,13 +10,13 @@ angular.module('main', [
     require('angular-cookies')
 ]);
 
-angular.module('main').config( ($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) => {
-    
+angular.module('main').config(($stateProvider, $urlRouterProvider, $qProvider, $mdIconProvider) => {
+
     moment.locale('fr');
 
     moment.updateLocale('fr', {
-        months : ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
-                  "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+            "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
         weekdays: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
     });
 
@@ -35,6 +35,10 @@ angular.module('main').config( ($stateProvider, $urlRouterProvider, $qProvider, 
     $stateProvider.state('profile.myoffers', {
         url: '/myoffers',
         template: '<myoffers></myoffers>'
+    });
+    $stateProvider.state('profile.myoffersdetails', {
+        url: '/myoffersdetails/:id',
+        template: '<myoffersdetails></myoffersdetails>'
     });
 
     /* Add New Routes Above */
