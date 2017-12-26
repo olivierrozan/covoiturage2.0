@@ -3,6 +3,7 @@ const app = express();
 const passport = require('passport');
 const expressSession = require('express-session');
 const bodyParser = require("body-parser");
+var cors = require('cors');
 
 const Sequelize = require('sequelize');
 const seq = require('./config/database').initDatabase(Sequelize);
@@ -26,6 +27,7 @@ const flash = require('connect-flash');
 require('./config/passport.ts').pass(passport, seq, Sequelize);
 
 app.use(flash());
+app.use(cors());
 
 const route = require('./app/routes.ts');
 route.allRoutes(app, passport, urlencodedParser, seq, Sequelize);

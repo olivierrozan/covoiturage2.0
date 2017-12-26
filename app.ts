@@ -37,7 +37,7 @@ angular.module('main').config(($stateProvider, $urlRouterProvider, $qProvider, $
         template: '<myoffers></myoffers>'
     });
     $stateProvider.state('profile.myoffersdetails', {
-        url: '/myoffersdetails/:id',
+        url: '/myoffersdetails?id',
         template: '<myoffersdetails></myoffersdetails>'
     });
 
