@@ -1,3 +1,5 @@
+// user 1: pwd: olivier59121
+
 const headers = require('../config/header');
 const myOffers = require('./myOffers.ts');
 const myOffersDetails = require('./myOffersDetails.ts');
@@ -14,7 +16,10 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
         headers.setHeaders(res);
         
         // console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
-        User.find({ where: { id: 1 } }).then((user) => {
+        User.find({ 
+            where: { id: 1 },
+            attributes: { exclude: ['password'] }
+        }).then((user) => {
             return res.json({ user: user.get() });
         });
     });
@@ -31,15 +36,17 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
         console.log("**body parsing** ", req.body);
         let userPassword = generateHash(req.body.newPassword);
 
-        User.findOne({ where: { id: 1 } }).then((user, err) => {
+        User.findOne({ 
+            where: { id: 1 },
+            attributes: ['password']
+        }).then((user, err) => {
             if (bcrypt.compareSync(req.body.currentPassword, user.get().password)) {
                 // update sequelize
                 User.update(
                     { password: userPassword }, { where: { id: 1 } }
                 ).then(() => {
-                    console.log('password change ok', userPassword);
+                    console.log('password change ok');
                 });
-                console.log('password change ok', userPassword);
                 return res.json({ message: 'success' });
             } else {
                 console.log('Error password change: Invalid current password: ');

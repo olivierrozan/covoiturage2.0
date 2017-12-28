@@ -14,9 +14,9 @@ angular.module('main').component('myoffers', {
         private offers;
         
         constructor(private $state, private MyoffersService: MyoffersService) {
-            console.log("Mes offres");
             
             this.MyoffersService.getMyOffers().then( response => {
+                console.log("Mes offres");
                 this.offers = response;
                 this.offers.map((el) => {
                     el.date_publication = moment(el.date_publication).format("dddd DD MMMM YYYY") + " à " + 
