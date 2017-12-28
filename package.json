@@ -3,7 +3,8 @@
   "scripts": {
     "start": "webpack-dev-server --port 9200",
     "test": "karma start --singleRun",
-    "build": "webpack --optimize-minimize"
+    "build": "webpack --optimize-minimize",
+    "back": "ts-node server/index.ts"
   },
   "version": "0.0.0",
   "dependencies": {

@@ -6,7 +6,7 @@ export let pass = (passport, seq, Sequelize) => {
     const User = require('../models/Users').initUserModel(seq, Sequelize);
     
     User.sync({ force: false }).then(() => {
-        console.log('Nice! Database looks fine');
+        console.log('Passport has been established successfully.');
     }).catch(function (err) {
         console.log(err, "Something went wrong with the Database Update!")
     });

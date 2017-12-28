@@ -14,7 +14,7 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
         headers.setHeaders(res);
         
         // console.log("---\n***auth?*** ", req.isAuthenticated(), req.session);
-        User.find({ where: { email: 'AAA@gmail.com' } }).then((user) => {
+        User.find({ where: { id: 1 } }).then((user) => {
             return res.json({ user: user.get() });
         });
     });
@@ -31,11 +31,11 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
         console.log("**body parsing** ", req.body);
         let userPassword = generateHash(req.body.newPassword);
 
-        User.findOne({ where: { email: 'AAA@gmail.com' } }).then((user, err) => {
+        User.findOne({ where: { id: 1 } }).then((user, err) => {
             if (bcrypt.compareSync(req.body.currentPassword, user.get().password)) {
                 // update sequelize
                 User.update(
-                    { password: userPassword }, { where: { email: 'AAA@gmail.com' } }
+                    { password: userPassword }, { where: { id: 1 } }
                 ).then(() => {
                     console.log('password change ok', userPassword);
                 });
@@ -69,7 +69,7 @@ export let getProfile = (app, seq, Sequelize, passport, User) => {
 
         // update sequelize
         User.update(
-            user, { where: { email: 'AAA@gmail.com' } }
+            user, { where: { id: 1 } }
         ).then(() => {
             console.log('update profile ok');
         });

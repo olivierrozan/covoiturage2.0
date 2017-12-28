@@ -1,6 +1,6 @@
 export let initUserModel = (seq, Sequelize) => {
 
-    return seq.define('user', {
+    return seq.define('users', {
         email: {
             type: Sequelize.STRING
         },

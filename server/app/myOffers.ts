@@ -8,7 +8,7 @@ export let getMyOffers = (app, seq, Sequelize) => {
         headers.setHeaders(res);
         
         console.log('** MES OFFRES **');
-        Offer.findAll({ where: { idUser: 5 } }).then( offers => {
+        Offer.findAll({ where: { idUser: 1 } }).then( offers => {
             return res.json({ offers: offers });
         });
     });

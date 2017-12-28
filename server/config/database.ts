@@ -1,6 +1,6 @@
 export let initDatabase = (Sequelize) => {
 
-    const db = new Sequelize('covoiturage', 'root', '', {
+    const db = new Sequelize('covoit_tmp', 'root', '', {
         host: 'localhost',
         dialect: 'mysql',
         

@@ -1,6 +1,6 @@
 export let initOffersModel = (seq, Sequelize) => {
 
-    return seq.define('offre', {
+    return seq.define('offers', {
         idUser: {
             type: Sequelize.INTEGER
         },

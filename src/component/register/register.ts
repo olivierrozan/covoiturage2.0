@@ -33,7 +33,6 @@ angular.module('main').component('register', {
             };
 
             this.RegisterService.sendRegisterData(this.user, config).then((response) => {
-                console.log("response: ", response);
 
                 if (response.data['message'] === 'Created') {
                     this.$mdToast.show(
