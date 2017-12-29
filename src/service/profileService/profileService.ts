@@ -11,7 +11,6 @@ export class ProfileService {
     public getUserProfile() {
         return this.$http.get('http://localhost:9300/profile').then((response) => {
             this.user = response.data['user'];
-            console.log('service', this.user);
             return this.user;
         }).then((error) => {
             return error;
