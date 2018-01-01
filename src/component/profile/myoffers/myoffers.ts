@@ -16,13 +16,14 @@ angular.module('main').component('myoffers', {
         constructor(private $state, private MyoffersService: MyoffersService) {
             
             this.MyoffersService.getMyOffers().then( response => {
-                console.log("Mes offres");
                 this.offers = response;
                 this.offers.map((el) => {
                     el.date_publication = moment(el.date_publication).format("dddd DD MMMM YYYY") + " à " + 
                     moment(el.date_publication).format("hh") + "H" + 
-                    moment(el.date_publication).format("mm")
+                    moment(el.date_publication).format("mm");
                 });
+                
+                console.log("Mes offres", this.offers);
             });
         }
 

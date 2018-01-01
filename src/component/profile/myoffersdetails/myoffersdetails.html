@@ -1,8 +1,20 @@
-<div>
-    <h3>details mes offres</h3>
-    <a ui-sref="profile.myoffers">back to mes offres</a>
+<a ui-sref="profile.myoffers">back to mes offres</a>
+<div layout="column" layout-margin flex layout-align="center center">
 
-    <p>Offres: {{myoffersdetailsCtrl.offers}}</p>
-    <p>Etapes: </p>
-    <p>Passagers: </p>
+    <h2 id="DetailsOffers">Général</h2>
+    <div id="details">
+        <h3 style="color: #388E3C;">Départ: {{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
+            }} {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}</h3>
+        <h3 style="color: #8e383c;">Arrivée: {{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
+            }} {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}</h3>
+        <h4>Publié le: {{ myoffersdetailsCtrl.detailsOffers.date_publication }}</h4>
+        <h4>Nombres de places restantes: {{ myoffersdetailsCtrl.detailsOffers.nombreDePlaces }}</h4>
+    </div>
+
+    <h2 id="DetailsOffers">Etapes</h2>
+    <div id="details">
+        <div ng-repeat="one in myoffersdetailsCtrl.detailsOffers.steps">
+            <h3 style="color: #383C8E;">Adresse: {{one.adresse }} {{one.codePostal }} {{one.ville }}</h3>
+        </div>
+    </div>
 </div>
