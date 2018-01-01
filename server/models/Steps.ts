@@ -9,7 +9,11 @@ export let initStepsModel = (seq, Sequelize) => {
         },
         ville: {
             type: Sequelize.STRING
+        },
+        date_etape: {
+            type: Sequelize.DATE
         }
+
     }, {
             freezeTableName: true,
             timestamps: false

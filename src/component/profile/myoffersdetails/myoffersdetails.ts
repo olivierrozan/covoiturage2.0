@@ -23,6 +23,12 @@ angular.module('main').component('myoffersdetails', {
                     moment(this.detailsOffers.date_publication).format("hh") + "H" + 
                     moment(this.detailsOffers.date_publication).format("mm");
                 console.log('details', this.detailsOffers);
+
+                this.detailsOffers.steps.map( el => {
+                    el.date_etape = moment(el.date_etape).format("dddd DD MMMM YYYY") + " à " + 
+                    moment(el.date_etape).format("hh") + "H" + 
+                    moment(el.date_etape).format("mm");
+                });
             });
         }
     },
