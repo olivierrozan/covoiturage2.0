@@ -1,20 +1,25 @@
 <a ui-sref="profile.myoffers">back to mes offres</a>
 <div layout="column" layout-margin flex layout-align="center center">
 
-    <h2 id="DetailsOffers">Général</h2>
-    <div id="details">
-        <h3 style="color: #388E3C;">Départ: {{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
+    <h2 id="DetailsTitle">Général</h2>
+    <div id="details_g">
+        <h3 style="color: #008800;">Départ: {{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
             }} {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}</h3>
-        <h3 style="color: #8e383c;">Arrivée: {{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
+        <h3 style="color: #880000;">Arrivée: {{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
             }} {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}</h3>
         <h4>Publié le: {{ myoffersdetailsCtrl.detailsOffers.date_publication }}</h4>
         <h4>Nombres de places restantes: {{ myoffersdetailsCtrl.detailsOffers.nombreDePlaces }}</h4>
     </div>
 
-    <h2 id="DetailsOffers">Etapes</h2>
-    <div id="details">
+    <h2 id="DetailsTitle">Etapes</h2>
+    <div id="details_e">
+        <h3 style="color: #008800;">{{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
+            }} {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}</h3>
         <div ng-repeat="one in myoffersdetailsCtrl.detailsOffers.steps">
-            <h3 style="color: #383C8E;">Adresse: {{one.adresse }} {{one.codePostal }} {{one.ville }} {{one.date_etape }}</h3>
+            <h3 style="color: #000088;">{{one.adresse }} {{one.codePostal }} {{one.ville }} {{one.date_etape }}</h3>
+            <h4 ng-repeat="onePassenger in one.users">{{ onePassenger.prenom }} {{ onePassenger.nom }}</h4>
         </div>
+        <h3 style="color: #880000;">{{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
+            }} {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}</h3>
     </div>
 </div>

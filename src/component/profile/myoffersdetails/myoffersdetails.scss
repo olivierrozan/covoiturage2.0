@@ -1,4 +1,4 @@
-#DetailsOffers {
+#DetailsTitle {
     background-color: rgb(33, 150, 243);
     margin:  20px auto 0px auto !important;
     padding: 20px;
@@ -8,8 +8,8 @@
     color: white;
 }
 
-#details {
-    background-color: /*rgba(33, 150, 243, 0.3)*/white;
+#details_g, #details_e {
+    background-color: white;
     margin: 0px auto 20px auto;
     padding: 20px;
     width: 480px;
@@ -18,20 +18,22 @@
     overflow: auto;
 }
 
-#details>h3 {
+#details_g>h3 {
     font-weight: 400 !important;
     font-size: 24px !important;
     margin: 10px 10px 5px 0px !important;
 }
 
-#details>span {
-    font-size: 16px;
-    margin-left: 5px;
-}
-
-#details>h4 {
+#details_g>h4 {
     color: rgba(0,0,0,0.54) !important;
     font-weight: bold !important;
     font-size: 14px !important;
     margin: 10px 10px 5px 0px !important;
+}
+
+#details_e>div>h4 {
+    color: #888888;
+    font-size: 14px !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
 }
