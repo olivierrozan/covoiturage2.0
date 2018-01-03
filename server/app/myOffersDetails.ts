@@ -43,15 +43,19 @@ export let getMyOffersDetails = (app, seq, Sequelize) => {
         Offers.findAll({
             include: [{
                 model: Steps,
+                attributes: { exclude: ['id'] },
                 include: [{
-                    model: Users
+                    model: Users,
+                    attributes: { exclude: ['id', 'password'] },
                 }]
-            }]
-        }, { where: { id: req.query.id } }).then(offers => {
+            }],
+            where: { id: req.query.id },
+            attributes: { exclude: ['idUser'] }
+        }).then(offers => {
             let o = {};
             offers.map((el, index, array) => {
                 if (el.dataValues.id == req.query.id) {
-                    o =  el;
+                    o = el;
                 } else {
                     delete el.dataValues;
                 }

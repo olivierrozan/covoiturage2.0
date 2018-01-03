@@ -1,9 +1,9 @@
 #DetailsTitle {
-    background-color: rgb(33, 150, 243);
-    margin:  20px auto 0px auto !important;
-    padding: 20px;
+    background-color: #1976D2;
+    margin:  10px auto 0px auto !important;
+    padding: 10px;
     width: 480px;
-    border-radius: 10px 10px 0px 0px;
+    // border-radius: 10px 10px 0px 0px;
     text-align: center;
     color: white;
 }
@@ -11,17 +11,17 @@
 #details_g, #details_e {
     background-color: white;
     margin: 0px auto 20px auto;
-    padding: 20px;
+    padding: 10px;
     width: 480px;
-    border-radius: 0px 0px 10px 10px;
+    // border-radius: 0px 0px 10px 10px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     overflow: auto;
 }
 
 #details_g>h3 {
-    font-weight: 400 !important;
-    font-size: 24px !important;
-    margin: 10px 10px 5px 0px !important;
+    // font-weight: 400 !important;
+    // font-size: 24px !important;
+    margin: 5px 0px !important;
 }
 
 #details_g>h4 {
@@ -31,9 +31,18 @@
     margin: 10px 10px 5px 0px !important;
 }
 
+#details_e>div>h3 {
+    margin: 5px 0px !important;
+}
+
 #details_e>div>h4 {
     color: #888888;
     font-size: 14px !important;
     margin-top: 2px !important;
     margin-bottom: 2px !important;
+    margin-left: 25px;
+}
+
+.icon_detail_depart {
+    fill: #008800;
 }

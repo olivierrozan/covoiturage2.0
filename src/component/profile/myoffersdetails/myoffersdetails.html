@@ -3,23 +3,34 @@
 
     <h2 id="DetailsTitle">Général</h2>
     <div id="details_g">
-        <h3 style="color: #008800;">Départ: {{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
-            }} {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}</h3>
-        <h3 style="color: #880000;">Arrivée: {{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
-            }} {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}</h3>
+        <h3 style="color: #008800;">
+            <md-icon style="fill: #008800;" md-svg-icon="flag"></md-icon>
+            {{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart }} 
+            {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}
+        </h3>
+        <h3 style="color: #880000;">
+            <md-icon style="fill: #880000;" md-svg-icon="flag-checkered"></md-icon>
+            {{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee}}
+            {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}
+        </h3>
         <h4>Publié le: {{ myoffersdetailsCtrl.detailsOffers.date_publication }}</h4>
         <h4>Nombres de places restantes: {{ myoffersdetailsCtrl.detailsOffers.nombreDePlaces }}</h4>
     </div>
 
     <h2 id="DetailsTitle">Etapes</h2>
     <div id="details_e">
-        <h3 style="color: #008800;">{{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
+
+        <h3 style="color: #008800;">
+            <md-icon style="fill: #008800;" md-svg-icon="map-marker"></md-icon>{{ myoffersdetailsCtrl.detailsOffers.adresseDepart }} {{ myoffersdetailsCtrl.detailsOffers.codePostalDepart
             }} {{ myoffersdetailsCtrl.detailsOffers.villeDepart }}</h3>
         <div ng-repeat="one in myoffersdetailsCtrl.detailsOffers.steps">
-            <h3 style="color: #000088;">{{one.adresse }} {{one.codePostal }} {{one.ville }} {{one.date_etape }}</h3>
+            <h3 style="color: #000088;">
+                <md-icon style="fill: #000088;" md-svg-icon="radiobox-marked"></md-icon>{{ one.adresse }} {{ one.codePostal }} {{ one.ville }}</h3>
+            <h4>{{ one.date_etape }}</h4>
             <h4 ng-repeat="onePassenger in one.users">{{ onePassenger.prenom }} {{ onePassenger.nom }}</h4>
         </div>
-        <h3 style="color: #880000;">{{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
+        <h3 style="color: #880000;">
+            <md-icon style="fill: #880000;" md-svg-icon="map-marker"></md-icon>{{ myoffersdetailsCtrl.detailsOffers.adresseArrivee }} {{ myoffersdetailsCtrl.detailsOffers.codePostalArrivee
             }} {{ myoffersdetailsCtrl.detailsOffers.villeArrivee }}</h3>
     </div>
 </div>
